@@ -74,3 +74,16 @@ C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\obj\Debug\WebSec
 C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\obj\Debug\WebSecureBookings.csproj.CopyComplete
 C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\obj\Debug\WebSecureBookings.dll
 C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\obj\Debug\WebSecureBookings.pdb
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.Security.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Owin.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.xml
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\Microsoft.Owin.Security.xml
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\es\Microsoft.AspNet.SignalR.Core.resources.dll
+C:\Users\racie\source\repos\WebSecureBookings\WebSecureBookings\bin\es\Microsoft.AspNet.SignalR.SystemWeb.resources.dll
