@@ -1,0 +1,17 @@
+﻿html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+.body-sistema {
+    margin-top: 50px;
+}
+
+nav {
+    background-color: #a9a9a9;
+}
+
+footer {
+    background-color: #a9a9a9;
+}
