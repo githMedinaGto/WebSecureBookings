@@ -18,6 +18,10 @@
 
     <%--Toma estilo--%>
     <link href="/Scripts/Css/Style.css" rel="stylesheet" />
+
+    <%--Toma de iconos --%>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet"/>
+
 </head>
 <body>
     <!--INICIO HEADER-->

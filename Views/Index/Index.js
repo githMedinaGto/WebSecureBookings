@@ -2,6 +2,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Llama a la función LlenarComboSeleLiga()
     LlenarComboSeleLiga();
+
+    document.getElementById('btnExample').addEventListener('click', function () {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+        modal.show();
+    });
 });
 
 // Función para llenar el combo de selección de liga
