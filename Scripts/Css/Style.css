@@ -15,3 +15,26 @@ nav {
 footer {
     background-color: #a9a9a9;
 }
+
+.btn-used{
+    background-color: #ff3b3f;
+    color: #fff;
+}
+
+.btn-used:hover {
+    background-color: #c9302c;
+}
+
+.modal-header {
+    background-color: #caebf2
+}
+
+button.close[type="button"] {
+    border-radius: 30%;
+    border: none;
+}
+
+button.close[type="button"]:hover {
+  background-color: #87ccdb;
+  /* Otros estilos adicionales */
+}
