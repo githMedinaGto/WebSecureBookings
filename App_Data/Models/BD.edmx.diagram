@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2db32f405f984dfa90be33d8b13cddd8" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_WSBModel.tActaConfirmacionCita" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tCalendario" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tCometario" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tDia" Width="1.5" PointX="9" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tEstado" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tMenu" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tMunicipio" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tRol" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_WSBModel.tUsuario" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="DB_WSBModel.fk_Acta" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Calendario" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_UsuarioC" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_UsuarioPro" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Dia" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_UsuarioP" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Municipio" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Municipio_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_WSBModel.fk_Rol_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
