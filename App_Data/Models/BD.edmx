@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_WSBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tActaConfirmacionCita">
+          <Key>
+            <PropertyRef Name="idActa" />
+          </Key>
+          <Property Name="idActa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuarioP" Type="int" />
+          <Property Name="idUsuarioC" Type="int" />
+          <Property Name="idCalendario" Type="int" />
+          <Property Name="bEstatus" Type="int" />
+          <Property Name="sMotivo" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCalendario">
+          <Key>
+            <PropertyRef Name="idCalendario" />
+          </Key>
+          <Property Name="idCalendario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuarioP" Type="int" />
+          <Property Name="idDia" Type="int" />
+          <Property Name="sHorarioInicio" Type="varchar" MaxLength="25" />
+          <Property Name="sHorarioFin" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tCometario">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAcata" Type="int" />
+          <Property Name="sComentario" Type="varchar" MaxLength="500" />
+          <Property Name="iCalificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="tDia">
+          <Key>
+            <PropertyRef Name="idDia" />
+          </Key>
+          <Property Name="idDia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iDia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tEstado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMunicipio" Type="int" />
+          <Property Name="sEstado" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMenu">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRol" Type="int" />
+          <Property Name="sRuta" Type="varchar" MaxLength="250" />
+          <Property Name="sDescripcion" Type="varchar" MaxLength="300" />
+          <Property Name="idRutaPadre" Type="int" />
+        </EntityType>
+        <EntityType Name="tMunicipio">
+          <Key>
+            <PropertyRef Name="idMunicipio" />
+          </Key>
+          <Property Name="idMunicipio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sMunicipio" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tRol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sNomRol" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="sDescripcion" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="tUsuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRol" Type="int" />
+          <Property Name="dFechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="sNombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="sApellidoP" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="sApellidoM" Type="varchar" MaxLength="250" />
+          <Property Name="sCorreo" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="stelefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sProfecion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="sAreaProfesion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="idMunicipio" Type="int" />
+          <Property Name="sColonia" Type="varchar" MaxLength="250" />
+          <Property Name="sCalle" Type="varchar" MaxLength="250" />
+          <Property Name="sUbicacion" Type="varchar" MaxLength="250" />
+          <Property Name="bEstatus" Type="bit" />
+          <Property Name="sToken" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <Association Name="fk_Acta">
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="0..1" />
+          <End Role="tCometario" Type="Self.tCometario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActaConfirmacionCita">
+              <PropertyRef Name="idActa" />
+            </Principal>
+            <Dependent Role="tCometario">
+              <PropertyRef Name="idAcata" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Calendario">
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCalendario">
+              <PropertyRef Name="idCalendario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idCalendario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dia">
+          <End Role="tDia" Type="Self.tDia" Multiplicity="0..1" />
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDia">
+              <PropertyRef Name="idDia" />
+            </Principal>
+            <Dependent Role="tCalendario">
+              <PropertyRef Name="idDia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Municipio">
+          <End Role="tMunicipio" Type="Self.tMunicipio" Multiplicity="0..1" />
+          <End Role="tEstado" Type="Self.tEstado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMunicipio">
+              <PropertyRef Name="idMunicipio" />
+            </Principal>
+            <Dependent Role="tEstado">
+              <PropertyRef Name="idMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Municipio_Usuario">
+          <End Role="tMunicipio" Type="Self.tMunicipio" Multiplicity="0..1" />
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMunicipio">
+              <PropertyRef Name="idMunicipio" />
+            </Principal>
+            <Dependent Role="tUsuario">
+              <PropertyRef Name="idMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol">
+          <End Role="tRol" Type="Self.tRol" Multiplicity="0..1" />
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tMenu">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol_Usuario">
+          <End Role="tRol" Type="Self.tRol" Multiplicity="0..1" />
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tUsuario">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioC">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idUsuarioC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioP">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tCalendario">
+              <PropertyRef Name="idUsuarioP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioPro">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idUsuarioP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_WSBModelStoreContainer">
+          <EntitySet Name="tActaConfirmacionCita" EntityType="Self.tActaConfirmacionCita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCalendario" EntityType="Self.tCalendario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCometario" EntityType="Self.tCometario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDia" EntityType="Self.tDia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEstado" EntityType="Self.tEstado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMenu" EntityType="Self.tMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMunicipio" EntityType="Self.tMunicipio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tRol" EntityType="Self.tRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsuario" EntityType="Self.tUsuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Acta" Association="Self.fk_Acta">
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+            <End Role="tCometario" EntitySet="tCometario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Calendario" Association="Self.fk_Calendario">
+            <End Role="tCalendario" EntitySet="tCalendario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dia" Association="Self.fk_Dia">
+            <End Role="tDia" EntitySet="tDia" />
+            <End Role="tCalendario" EntitySet="tCalendario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Municipio" Association="Self.fk_Municipio">
+            <End Role="tMunicipio" EntitySet="tMunicipio" />
+            <End Role="tEstado" EntitySet="tEstado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Municipio_Usuario" Association="Self.fk_Municipio_Usuario">
+            <End Role="tMunicipio" EntitySet="tMunicipio" />
+            <End Role="tUsuario" EntitySet="tUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol" Association="Self.fk_Rol">
+            <End Role="tRol" EntitySet="tRol" />
+            <End Role="tMenu" EntitySet="tMenu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol_Usuario" Association="Self.fk_Rol_Usuario">
+            <End Role="tRol" EntitySet="tRol" />
+            <End Role="tUsuario" EntitySet="tUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioC" Association="Self.fk_UsuarioC">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioP" Association="Self.fk_UsuarioP">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tCalendario" EntitySet="tCalendario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioPro" Association="Self.fk_UsuarioPro">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_WSBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tActaConfirmacionCita">
+          <Key>
+            <PropertyRef Name="idActa" />
+          </Key>
+          <Property Name="idActa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuarioP" Type="Int32" />
+          <Property Name="idUsuarioC" Type="Int32" />
+          <Property Name="idCalendario" Type="Int32" />
+          <Property Name="bEstatus" Type="Int32" />
+          <Property Name="sMotivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tCometario" Relationship="Self.fk_Acta" FromRole="tActaConfirmacionCita" ToRole="tCometario" />
+          <NavigationProperty Name="tCalendario" Relationship="Self.fk_Calendario" FromRole="tActaConfirmacionCita" ToRole="tCalendario" />
+          <NavigationProperty Name="tUsuario" Relationship="Self.fk_UsuarioC" FromRole="tActaConfirmacionCita" ToRole="tUsuario" />
+          <NavigationProperty Name="tUsuario1" Relationship="Self.fk_UsuarioPro" FromRole="tActaConfirmacionCita" ToRole="tUsuario" />
+        </EntityType>
+        <EntityType Name="tCalendario">
+          <Key>
+            <PropertyRef Name="idCalendario" />
+          </Key>
+          <Property Name="idCalendario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuarioP" Type="Int32" />
+          <Property Name="idDia" Type="Int32" />
+          <Property Name="sHorarioInicio" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="sHorarioFin" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tActaConfirmacionCita" Relationship="Self.fk_Calendario" FromRole="tCalendario" ToRole="tActaConfirmacionCita" />
+          <NavigationProperty Name="tDia" Relationship="Self.fk_Dia" FromRole="tCalendario" ToRole="tDia" />
+          <NavigationProperty Name="tUsuario" Relationship="Self.fk_UsuarioP" FromRole="tCalendario" ToRole="tUsuario" />
+        </EntityType>
+        <EntityType Name="tCometario">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAcata" Type="Int32" />
+          <Property Name="sComentario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="iCalificacion" Type="Int32" />
+          <NavigationProperty Name="tActaConfirmacionCita" Relationship="Self.fk_Acta" FromRole="tCometario" ToRole="tActaConfirmacionCita" />
+        </EntityType>
+        <EntityType Name="tDia">
+          <Key>
+            <PropertyRef Name="idDia" />
+          </Key>
+          <Property Name="idDia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iDia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tCalendario" Relationship="Self.fk_Dia" FromRole="tDia" ToRole="tCalendario" />
+        </EntityType>
+        <EntityType Name="tEstado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMunicipio" Type="Int32" />
+          <Property Name="sEstado" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tMunicipio" Relationship="Self.fk_Municipio" FromRole="tEstado" ToRole="tMunicipio" />
+        </EntityType>
+        <EntityType Name="tMenu">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRol" Type="Int32" />
+          <Property Name="sRuta" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sDescripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="idRutaPadre" Type="Int32" />
+          <NavigationProperty Name="tRol" Relationship="Self.fk_Rol" FromRole="tMenu" ToRole="tRol" />
+        </EntityType>
+        <EntityType Name="tMunicipio">
+          <Key>
+            <PropertyRef Name="idMunicipio" />
+          </Key>
+          <Property Name="idMunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sMunicipio" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tEstado" Relationship="Self.fk_Municipio" FromRole="tMunicipio" ToRole="tEstado" />
+          <NavigationProperty Name="tUsuario" Relationship="Self.fk_Municipio_Usuario" FromRole="tMunicipio" ToRole="tUsuario" />
+        </EntityType>
+        <EntityType Name="tRol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sNomRol" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sDescripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tMenu" Relationship="Self.fk_Rol" FromRole="tRol" ToRole="tMenu" />
+          <NavigationProperty Name="tUsuario" Relationship="Self.fk_Rol_Usuario" FromRole="tRol" ToRole="tUsuario" />
+        </EntityType>
+        <EntityType Name="tUsuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRol" Type="Int32" />
+          <Property Name="dFechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sNombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sApellidoP" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sApellidoM" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sCorreo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stelefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sProfecion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sAreaProfesion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idMunicipio" Type="Int32" />
+          <Property Name="sColonia" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sCalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sUbicacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bEstatus" Type="Boolean" />
+          <Property Name="sToken" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tActaConfirmacionCita" Relationship="Self.fk_UsuarioC" FromRole="tUsuario" ToRole="tActaConfirmacionCita" />
+          <NavigationProperty Name="tActaConfirmacionCita1" Relationship="Self.fk_UsuarioPro" FromRole="tUsuario" ToRole="tActaConfirmacionCita" />
+          <NavigationProperty Name="tCalendario" Relationship="Self.fk_UsuarioP" FromRole="tUsuario" ToRole="tCalendario" />
+          <NavigationProperty Name="tMunicipio" Relationship="Self.fk_Municipio_Usuario" FromRole="tUsuario" ToRole="tMunicipio" />
+          <NavigationProperty Name="tRol" Relationship="Self.fk_Rol_Usuario" FromRole="tUsuario" ToRole="tRol" />
+        </EntityType>
+        <Association Name="fk_Acta">
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="0..1" />
+          <End Role="tCometario" Type="Self.tCometario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActaConfirmacionCita">
+              <PropertyRef Name="idActa" />
+            </Principal>
+            <Dependent Role="tCometario">
+              <PropertyRef Name="idAcata" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Calendario">
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCalendario">
+              <PropertyRef Name="idCalendario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idCalendario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioC">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idUsuarioC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioPro">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tActaConfirmacionCita" Type="Self.tActaConfirmacionCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tActaConfirmacionCita">
+              <PropertyRef Name="idUsuarioP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Dia">
+          <End Role="tDia" Type="Self.tDia" Multiplicity="0..1" />
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDia">
+              <PropertyRef Name="idDia" />
+            </Principal>
+            <Dependent Role="tCalendario">
+              <PropertyRef Name="idDia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioP">
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="0..1" />
+          <End Role="tCalendario" Type="Self.tCalendario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="tCalendario">
+              <PropertyRef Name="idUsuarioP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Municipio">
+          <End Role="tMunicipio" Type="Self.tMunicipio" Multiplicity="0..1" />
+          <End Role="tEstado" Type="Self.tEstado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMunicipio">
+              <PropertyRef Name="idMunicipio" />
+            </Principal>
+            <Dependent Role="tEstado">
+              <PropertyRef Name="idMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol">
+          <End Role="tRol" Type="Self.tRol" Multiplicity="0..1" />
+          <End Role="tMenu" Type="Self.tMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tMenu">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Municipio_Usuario">
+          <End Role="tMunicipio" Type="Self.tMunicipio" Multiplicity="0..1" />
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMunicipio">
+              <PropertyRef Name="idMunicipio" />
+            </Principal>
+            <Dependent Role="tUsuario">
+              <PropertyRef Name="idMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Rol_Usuario">
+          <End Role="tRol" Type="Self.tRol" Multiplicity="0..1" />
+          <End Role="tUsuario" Type="Self.tUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tUsuario">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_WSBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tActaConfirmacionCita" EntityType="Self.tActaConfirmacionCita" />
+          <EntitySet Name="tCalendario" EntityType="Self.tCalendario" />
+          <EntitySet Name="tCometario" EntityType="Self.tCometario" />
+          <EntitySet Name="tDia" EntityType="Self.tDia" />
+          <EntitySet Name="tEstado" EntityType="Self.tEstado" />
+          <EntitySet Name="tMenu" EntityType="Self.tMenu" />
+          <EntitySet Name="tMunicipio" EntityType="Self.tMunicipio" />
+          <EntitySet Name="tRol" EntityType="Self.tRol" />
+          <EntitySet Name="tUsuario" EntityType="Self.tUsuario" />
+          <AssociationSet Name="fk_Acta" Association="Self.fk_Acta">
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+            <End Role="tCometario" EntitySet="tCometario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Calendario" Association="Self.fk_Calendario">
+            <End Role="tCalendario" EntitySet="tCalendario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioC" Association="Self.fk_UsuarioC">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioPro" Association="Self.fk_UsuarioPro">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tActaConfirmacionCita" EntitySet="tActaConfirmacionCita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Dia" Association="Self.fk_Dia">
+            <End Role="tDia" EntitySet="tDia" />
+            <End Role="tCalendario" EntitySet="tCalendario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioP" Association="Self.fk_UsuarioP">
+            <End Role="tUsuario" EntitySet="tUsuario" />
+            <End Role="tCalendario" EntitySet="tCalendario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Municipio" Association="Self.fk_Municipio">
+            <End Role="tMunicipio" EntitySet="tMunicipio" />
+            <End Role="tEstado" EntitySet="tEstado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol" Association="Self.fk_Rol">
+            <End Role="tRol" EntitySet="tRol" />
+            <End Role="tMenu" EntitySet="tMenu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Municipio_Usuario" Association="Self.fk_Municipio_Usuario">
+            <End Role="tMunicipio" EntitySet="tMunicipio" />
+            <End Role="tUsuario" EntitySet="tUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Rol_Usuario" Association="Self.fk_Rol_Usuario">
+            <End Role="tRol" EntitySet="tRol" />
+            <End Role="tUsuario" EntitySet="tUsuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_WSBModelStoreContainer" CdmEntityContainer="DB_WSBEntities">
+          <EntitySetMapping Name="tActaConfirmacionCita">
+            <EntityTypeMapping TypeName="DB_WSBModel.tActaConfirmacionCita">
+              <MappingFragment StoreEntitySet="tActaConfirmacionCita">
+                <ScalarProperty Name="idActa" ColumnName="idActa" />
+                <ScalarProperty Name="idUsuarioP" ColumnName="idUsuarioP" />
+                <ScalarProperty Name="idUsuarioC" ColumnName="idUsuarioC" />
+                <ScalarProperty Name="idCalendario" ColumnName="idCalendario" />
+                <ScalarProperty Name="bEstatus" ColumnName="bEstatus" />
+                <ScalarProperty Name="sMotivo" ColumnName="sMotivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCalendario">
+            <EntityTypeMapping TypeName="DB_WSBModel.tCalendario">
+              <MappingFragment StoreEntitySet="tCalendario">
+                <ScalarProperty Name="idCalendario" ColumnName="idCalendario" />
+                <ScalarProperty Name="idUsuarioP" ColumnName="idUsuarioP" />
+                <ScalarProperty Name="idDia" ColumnName="idDia" />
+                <ScalarProperty Name="sHorarioInicio" ColumnName="sHorarioInicio" />
+                <ScalarProperty Name="sHorarioFin" ColumnName="sHorarioFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCometario">
+            <EntityTypeMapping TypeName="DB_WSBModel.tCometario">
+              <MappingFragment StoreEntitySet="tCometario">
+                <ScalarProperty Name="idComentario" ColumnName="idComentario" />
+                <ScalarProperty Name="idAcata" ColumnName="idAcata" />
+                <ScalarProperty Name="sComentario" ColumnName="sComentario" />
+                <ScalarProperty Name="iCalificacion" ColumnName="iCalificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDia">
+            <EntityTypeMapping TypeName="DB_WSBModel.tDia">
+              <MappingFragment StoreEntitySet="tDia">
+                <ScalarProperty Name="idDia" ColumnName="idDia" />
+                <ScalarProperty Name="iDia" ColumnName="iDia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEstado">
+            <EntityTypeMapping TypeName="DB_WSBModel.tEstado">
+              <MappingFragment StoreEntitySet="tEstado">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
+                <ScalarProperty Name="sEstado" ColumnName="sEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMenu">
+            <EntityTypeMapping TypeName="DB_WSBModel.tMenu">
+              <MappingFragment StoreEntitySet="tMenu">
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="sRuta" ColumnName="sRuta" />
+                <ScalarProperty Name="sDescripcion" ColumnName="sDescripcion" />
+                <ScalarProperty Name="idRutaPadre" ColumnName="idRutaPadre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMunicipio">
+            <EntityTypeMapping TypeName="DB_WSBModel.tMunicipio">
+              <MappingFragment StoreEntitySet="tMunicipio">
+                <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
+                <ScalarProperty Name="sMunicipio" ColumnName="sMunicipio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tRol">
+            <EntityTypeMapping TypeName="DB_WSBModel.tRol">
+              <MappingFragment StoreEntitySet="tRol">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="sNomRol" ColumnName="sNomRol" />
+                <ScalarProperty Name="sDescripcion" ColumnName="sDescripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsuario">
+            <EntityTypeMapping TypeName="DB_WSBModel.tUsuario">
+              <MappingFragment StoreEntitySet="tUsuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="dFechaRegistro" ColumnName="dFechaRegistro" />
+                <ScalarProperty Name="sNombre" ColumnName="sNombre" />
+                <ScalarProperty Name="sApellidoP" ColumnName="sApellidoP" />
+                <ScalarProperty Name="sApellidoM" ColumnName="sApellidoM" />
+                <ScalarProperty Name="sCorreo" ColumnName="sCorreo" />
+                <ScalarProperty Name="stelefono" ColumnName="stelefono" />
+                <ScalarProperty Name="sProfecion" ColumnName="sProfecion" />
+                <ScalarProperty Name="sAreaProfesion" ColumnName="sAreaProfesion" />
+                <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
+                <ScalarProperty Name="sColonia" ColumnName="sColonia" />
+                <ScalarProperty Name="sCalle" ColumnName="sCalle" />
+                <ScalarProperty Name="sUbicacion" ColumnName="sUbicacion" />
+                <ScalarProperty Name="bEstatus" ColumnName="bEstatus" />
+                <ScalarProperty Name="sToken" ColumnName="sToken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
