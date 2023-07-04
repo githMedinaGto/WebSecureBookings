@@ -48,11 +48,14 @@ function validarTexto(input, minLength, maxLength) {
     // Verificar la longitud del valor ingresado
     if (value.length < minLength) {
         mostrarError(input, 'Se requiere un mínimo de ' + minLength + ' caracteres');
+        return false;
     } else if (value.length > maxLength) {
         mostrarError(input, 'Se permite un máximo de ' + maxLength + ' caracteres');
         input.value = value.substring(0, maxLength); // Elimina los caracteres adicionales
+        return false;
     } else {
         ocultarError(input);
+        return true;
     }
 }
 

@@ -14,11 +14,17 @@ nav {
 
 footer {
     background-color: #a9a9a9;
+    /*padding: 0 0 30px 0;*/
+    font-size: 14px;
 }
 
-.btn-used{
+.footer-derechos {
+    background-color: #9c9c9c;
+}
+
+.btn-used {
     background-color: #ff3b3f;
-    color: #fff;
+        color: #fff;
 }
 
 .btn-used:hover {
