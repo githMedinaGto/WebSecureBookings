@@ -14,7 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <%--JQuery--%>
-    <script src="/Scripts/Jquery/jquery-3.6.3.js"></script>
+    <script src="<%= ResolveUrl("~/Scripts/Jquery/jquery-3.6.3.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/Jquery/blockUI.js") %>"></script>
+    <%--<script src="/Scripts/Jquery/jquery-3.6.3.js"></script>--%>
+
 
     <%--Toma estilo--%>
     <link href="/Scripts/Css/Style.css" rel="stylesheet" />
@@ -30,6 +33,9 @@
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
                 <!-- Encabezado del navbar -->
+                <span style="padding-right:0; padding-top: 0; display:block;">
+                    <img class="img-fluid manImg" src="<%= ResolveUrl("~/Assests/Img/Logo 2.jpeg") %>" alt="Image" height="20" width="20" />
+                </span>
                 <a class="navbar-brand" href="#">WebSecureBookings</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -69,9 +75,23 @@
     <footer class="footer-sistema container-fluid">
         <div class="row">
             <div class="col-12">
+                <br />
                 <%--<img id="Img" src="porDefinir" runat="server" alt="logo" />--%>
             </div>
-            <div class="col-12 text-center">
+            <div class="col-lg-6 col-md-6 aling-middle">
+                <h3>Web Securete Booking</h3>
+                <p>
+                    Av.Univesidad <br />
+                    Dolores Hidalgo, GTO.<br />
+                    <strong>Numero: </strong> +52 <br />
+                    <strong>Correo:</strong> <br />
+                    
+                </p>
+            </div>
+            <div class="col-lg-6 col-md-6 aling-middle text-center">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7441.618527043131!2d-100.93666822228995!3d21.159987600000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842b3fdfaaed04ad%3A0x2ce997e250d0e900!2sUtng!5e0!3m2!1ses-419!2smx!4v1688433682462!5m2!1ses-419!2smx" width="400" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="col-12 text-center footer-derechos">
                 <p>WebSecureBookings 2022. ©Todos los derechos reservados.</p>
             </div>
         </div>
