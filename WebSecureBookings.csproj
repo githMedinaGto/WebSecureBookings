@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Models\ActaConfirmacionCita\ActaModel.cs" />
-    <Compile Include="App_Data\AccessToData\Connection.cs" />
     <Compile Include="App_Data\Controllers\Index\IndexController.cs" />
     <Compile Include="App_Data\Models\BD.Context.cs">
       <AutoGen>True</AutoGen>
