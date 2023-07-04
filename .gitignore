@@ -1,6 +1,5 @@
 # Ignorar archivos binarios
 *.exe
-*.dll
 *.pdb
 
 # Ignorar archivos de configuración local
