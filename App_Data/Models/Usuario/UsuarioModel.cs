@@ -10,6 +10,7 @@ namespace WebSecureBookings
 {
     public class UsuarioModel
     {
+
         public int idUsuario { get; set; }
         public int idRol { get; set; }
 	    public Nullable<DateTime> dFechaRegistro { get; set; }
@@ -29,5 +30,9 @@ namespace WebSecureBookings
 
         public virtual RolModel Rol { get; set; }
         public virtual MunicipioModel Municipio { get; set; }
+        public virtual EstadoModel Estado { get; set; }
+
+        internal string sMunicipio;
+        internal string sEstado;
     }
 }

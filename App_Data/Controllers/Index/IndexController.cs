@@ -15,7 +15,7 @@ namespace WebSecureBookings.Controllers.IndexController
 {
     public class IndexController
     {
-
+        [HttpGet]
         public ResponseModel<List<RolModel>> GetRolDataTable()
         {
             

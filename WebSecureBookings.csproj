@@ -117,6 +117,8 @@
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
     <Content Include="Views\Index\Index.aspx" />
     <Content Include="Views\Index\Index.js" />
+    <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
+    <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@
     </Compile>
     <Compile Include="App_Data\Models\Menu\MenuModel.cs" />
     <Compile Include="App_Data\Models\Municipio\MunicipioModel.cs" />
+    <Compile Include="App_Data\Controllers\PerfilesProfesionistas\PerfilesProfesionistasController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Data\Models\tActaConfirmacionCita.cs">
       <DependentUpon>BD.tt</DependentUpon>
@@ -187,6 +190,13 @@
     </Compile>
     <Compile Include="Views\Index\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.cs">
+      <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.designer.cs">
+      <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -44,3 +44,7 @@ button.close[type="button"]:hover {
   background-color: #87ccdb;
   /* Otros estilos adicionales */
 }
+
+.card {
+    background-color: #caebf2
+}
