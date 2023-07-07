@@ -14,5 +14,7 @@ namespace WebSecureBookings
 	    public string sHorarioFin { get; set; }
 
         public virtual UsuarioModel Usuario { get; set; }
+        public virtual DiaModel Dia { get; set; }
+        public int iDia { get; internal set; }
     }
 }

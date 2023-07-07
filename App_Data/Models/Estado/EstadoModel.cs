@@ -12,5 +12,10 @@ namespace WebSecureBookings
 	    public string sEstado { get; set; }
 
         public virtual MunicipioModel Municipio { get; set; }
+
+        public static implicit operator EstadoModel(List<EstadoModel> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
