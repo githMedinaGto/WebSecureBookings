@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_WSBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tActaConfirmacionCita">
           <Key>
             <PropertyRef Name="idActa" />
@@ -216,7 +226,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB_WSBModelStoreContainer">
+        <EntityContainer Name="DBStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tActaConfirmacionCita" EntityType="Self.tActaConfirmacionCita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCalendario" EntityType="Self.tCalendario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCometario" EntityType="Self.tCometario" Schema="dbo" store:Type="Tables" />
@@ -271,7 +282,17 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DB_WSBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="tActaConfirmacionCita">
           <Key>
             <PropertyRef Name="idActa" />
@@ -503,7 +524,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB_WSBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB_WSBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tActaConfirmacionCita" EntityType="Self.tActaConfirmacionCita" />
           <EntitySet Name="tCalendario" EntityType="Self.tCalendario" />
           <EntitySet Name="tCometario" EntityType="Self.tCometario" />
@@ -559,9 +581,20 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB_WSBModelStoreContainer" CdmEntityContainer="DB_WSBEntities">
+        <EntityContainerMapping StorageEntityContainer="DBStoreContainer" CdmEntityContainer="DB_WSBEntities1">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tActaConfirmacionCita">
-            <EntityTypeMapping TypeName="DB_WSBModel.tActaConfirmacionCita">
+            <EntityTypeMapping TypeName="DB.tActaConfirmacionCita">
               <MappingFragment StoreEntitySet="tActaConfirmacionCita">
                 <ScalarProperty Name="idActa" ColumnName="idActa" />
                 <ScalarProperty Name="idUsuarioP" ColumnName="idUsuarioP" />
@@ -573,7 +606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tCalendario">
-            <EntityTypeMapping TypeName="DB_WSBModel.tCalendario">
+            <EntityTypeMapping TypeName="DB.tCalendario">
               <MappingFragment StoreEntitySet="tCalendario">
                 <ScalarProperty Name="idCalendario" ColumnName="idCalendario" />
                 <ScalarProperty Name="idUsuarioP" ColumnName="idUsuarioP" />
@@ -584,7 +617,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tCometario">
-            <EntityTypeMapping TypeName="DB_WSBModel.tCometario">
+            <EntityTypeMapping TypeName="DB.tCometario">
               <MappingFragment StoreEntitySet="tCometario">
                 <ScalarProperty Name="idComentario" ColumnName="idComentario" />
                 <ScalarProperty Name="idAcata" ColumnName="idAcata" />
@@ -594,7 +627,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tDia">
-            <EntityTypeMapping TypeName="DB_WSBModel.tDia">
+            <EntityTypeMapping TypeName="DB.tDia">
               <MappingFragment StoreEntitySet="tDia">
                 <ScalarProperty Name="idDia" ColumnName="idDia" />
                 <ScalarProperty Name="iDia" ColumnName="iDia" />
@@ -602,7 +635,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tEstado">
-            <EntityTypeMapping TypeName="DB_WSBModel.tEstado">
+            <EntityTypeMapping TypeName="DB.tEstado">
               <MappingFragment StoreEntitySet="tEstado">
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
@@ -611,7 +644,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tMenu">
-            <EntityTypeMapping TypeName="DB_WSBModel.tMenu">
+            <EntityTypeMapping TypeName="DB.tMenu">
               <MappingFragment StoreEntitySet="tMenu">
                 <ScalarProperty Name="idMenu" ColumnName="idMenu" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
@@ -622,7 +655,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tMunicipio">
-            <EntityTypeMapping TypeName="DB_WSBModel.tMunicipio">
+            <EntityTypeMapping TypeName="DB.tMunicipio">
               <MappingFragment StoreEntitySet="tMunicipio">
                 <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
                 <ScalarProperty Name="sMunicipio" ColumnName="sMunicipio" />
@@ -630,7 +663,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tRol">
-            <EntityTypeMapping TypeName="DB_WSBModel.tRol">
+            <EntityTypeMapping TypeName="DB.tRol">
               <MappingFragment StoreEntitySet="tRol">
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="sNomRol" ColumnName="sNomRol" />
@@ -639,7 +672,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tUsuario">
-            <EntityTypeMapping TypeName="DB_WSBModel.tUsuario">
+            <EntityTypeMapping TypeName="DB.tUsuario">
               <MappingFragment StoreEntitySet="tUsuario">
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />

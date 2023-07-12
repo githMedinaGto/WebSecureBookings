@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1903957c555d4dbd96c729fff4155df5" Name="Diagram1">
+        <EntityTypeShape EntityType="DB.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tActaConfirmacionCita" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tCalendario" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tCometario" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tDia" Width="1.5" PointX="9" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tEstado" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tMenu" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tMunicipio" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tRol" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB.tUsuario" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="DB.fk_Acta" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Calendario" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_UsuarioC" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_UsuarioPro" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Dia" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_UsuarioP" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Municipio" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Municipio_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="DB.fk_Rol_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

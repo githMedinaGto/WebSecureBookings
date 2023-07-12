@@ -25,6 +25,7 @@ namespace WebSecureBookings.App_Data.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tActaConfirmacionCita> tActaConfirmacionCita { get; set; }
         public virtual DbSet<tCalendario> tCalendario { get; set; }
         public virtual DbSet<tCometario> tCometario { get; set; }

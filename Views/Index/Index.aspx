@@ -5,7 +5,7 @@
     <script src="../../Scripts/Jquery/ValidacionCaracteres.js"></script>
     <script src="../../Scripts/Jquery/AccionesModales.js"></script>
     <script src="Index.js"></script>
-</asp:Content>
+</asp:Content> 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <br />
     <div class="row" style="width: 100%;">
