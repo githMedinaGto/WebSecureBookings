@@ -237,6 +237,7 @@
       <DependentUpon>DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Controllers\Encriptacion\EncriptionController.cs" />
+    <Compile Include="App_Data\Models\ManejoDeErrores\ManejoDeErroresModel.cs" />
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
