@@ -197,6 +197,8 @@
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.js" />
     <Content Include="Scripts\Jquery\jquery-3.6.3.js" />
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
+    <Content Include="Views\VistaCitas\VistaCitas.aspx" />
+    <Content Include="Views\VistaCitas\VistaCitas.js" />
     <Content Include="Views\Index\Index.aspx" />
     <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
@@ -268,6 +270,13 @@
     </Compile>
     <Compile Include="App_Data\Models\tUsuario.cs">
       <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.designer.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Index\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
