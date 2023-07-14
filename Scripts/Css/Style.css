@@ -48,3 +48,19 @@ button.close[type="button"]:hover {
 .card {
     background-color: #caebf2
 }
+
+.custom-nav-tabs .nav-link {
+    background-color: #9c9c9c;
+    color: black;
+    border-radius: 10px 10px 0 0;
+}
+
+.custom-nav-tabs .nav-link.active {
+      background-color: #caebf2;
+      color: black;
+      border-radius: 10px 10px 0 0;
+}
+
+li:hover {
+    cursor: pointer;
+}
