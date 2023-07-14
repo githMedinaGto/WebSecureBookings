@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebSecureBookings.App_Data.Models;
 
@@ -468,6 +466,16 @@ namespace WebSecureBookings
         [HttpGet]
         public ResponseModel<List<CalendarioModel>> GetProfesionistaCalendario(int idProfesionista)
         {
+            string sLunes = "<div class=\"tab-pane fade\" id=\"nav-lunes\" role=\"tabpanel\" aria-labelledby=\"nav-lunes-tab\">" +
+                "<ul class=\"list-group\" id=\"content-lunes\">";
+            string sMartes = "<div class=\"tab-pane fade\" id=\"nav-martes\" role=\"tabpanel\" aria-labelledby=\"nav-martes-tab\">" +
+                "<ul class=\"list-group\" id=\"content-martes\">";
+            string sMiercoles = "<div class=\"tab-pane fade\" id=\"nav-miercoles\" role=\"tabpanel\" aria-labelledby=\"nav-miercoles-tab\">" +
+                "<ul class=\"list-group\" id=\"content-mierccoles\">";
+            string sJuevez = "<div class=\"tab-pane fade\" id=\"nav-jueves\" role=\"tabpanel\" aria-labelledby=\"nav-jueves-tab\">" +
+                "<ul class=\"list-group\" id=\"content-jueves\">";
+            string sViernez = "<div class=\"tab-pane fade\" id=\"nav-viernes\" role=\"tabpanel\" aria-labelledby=\"nav-viernes-tab\">" +
+                "<ul class=\"list-group\" id=\"content-viernes\">";
             using (var dbContext = new DB_WSBEntities())
             {
                 var query = from tc in dbContext.tCalendario
@@ -486,11 +494,90 @@ namespace WebSecureBookings
 
                 var calendarios = query.ToList();
 
+                foreach (var calendario in calendarios)
+                {
+                    string sFecha = GenerarFecha(calendario.iDia);
+
+                    switch (calendario.iDia)
+                    {
+                        case 1:
+                            sLunes += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                            sLunes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                            sLunes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                            sLunes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                            sLunes += "<p>Fecha</p>";
+                            sLunes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                            sLunes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                            sLunes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                            sLunes += "</li>";
+                            break;
+                        case 2:
+                            sMartes += $"<li class=\"list-group-item\"  onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                            sMartes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                            sMartes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                            sMartes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                            sMartes += "<p>Fecha</p>";
+                            sMartes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                            sMartes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                            sMartes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                            sMartes += "</li>";
+                            break;
+                        case 3:
+                            sMiercoles += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                            sMiercoles += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                            sMiercoles += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                            sMiercoles += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                            sMiercoles += "<p>Fecha</p>";
+                            sMiercoles += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                            sMiercoles += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                            sMiercoles += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                            sMiercoles += "</li>";
+                            break;
+                        case 4:
+                            sJuevez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                            sJuevez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                            sJuevez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                            sJuevez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                            sJuevez += "<p>Fecha</p>";
+                            sJuevez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                            sJuevez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                            sJuevez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                            sJuevez += "</li>";
+                            break;
+                        case 5:
+                            sViernez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                            sViernez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                            sViernez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                            sViernez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                            sViernez += "<p>Fecha</p>";
+                            sViernez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha} &nbsp;&nbsp;</span>";
+                            sViernez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                            sViernez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                            sViernez += "</li>";
+                            break;
+                        default:
+                            sLunes += "</ul>\r\n</div>";
+                            sMartes += "</ul>\r\n</div>";
+                            sMiercoles += "</ul>\r\n</div>";
+                            sJuevez += "</ul>\r\n</div>";
+                            sViernez += "</ul>\r\n</div>";
+                            break;
+                    }
+                }
+
+                sLunes += "</ul>\r\n</div>";
+                sMartes += "</ul>\r\n</div>";
+                sMiercoles += "</ul>\r\n</div>";
+                sJuevez += "</ul>\r\n</div>";
+                sViernez += "</ul>\r\n</div>";
+
+                string sCalendario = sLunes + sMartes + sJuevez + sViernez;
+
                 return new ResponseModel<List<CalendarioModel>>
                 {
                     StatusCode = 200,
                     Message = "Datos obtenidos correctamente",
-                    Data = calendarios
+                    Resultado = sCalendario
                 };
             }
         }
@@ -542,6 +629,17 @@ namespace WebSecureBookings
                     };
                 }
             }
+        }
+
+
+        public string GenerarFecha(int numeroDia)
+        {
+            DateTime fecha = DateTime.Now;
+            fecha = fecha.AddDays(numeroDia - (int)fecha.DayOfWeek);
+            string anio = fecha.Year.ToString();
+            string mes = fecha.Month.ToString().PadLeft(2, '0');
+            string dia = fecha.Day.ToString().PadLeft(2, '0');
+            return anio + '-' + mes + '-' + dia;
         }
 
     }
