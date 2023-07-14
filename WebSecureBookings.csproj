@@ -108,6 +108,7 @@
       <LastGenOutput>DB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\Css\RegistroUsuarios.css" />
     <Content Include="Scripts\Css\Style.css" />
     <Content Include="Scripts\Jquery\AccionesModales.js" />
     <Content Include="Scripts\Jquery\blockUI.js" />
@@ -201,6 +202,8 @@
     <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.js" />
+    <Content Include="Views\RegistroUsuarios\RegistroUsuarios.aspx" />
+    <Content Include="Views\RegistroUsuarios\RegistroUsuarios.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -239,9 +242,7 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App_Data\Models\sysdiagrams.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="App_Data\Controllers\RegistroUsuarios\RegristroUsuariosController.cs" />
     <Compile Include="App_Data\Models\tActaConfirmacionCita.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -282,6 +283,13 @@
     </Compile>
     <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.designer.cs">
       <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistroUsuarios\RegistroUsuarios.aspx.cs">
+      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroUsuarios\RegistroUsuarios.aspx.designer.cs">
+      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
