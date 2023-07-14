@@ -16,6 +16,8 @@
     <%--JQuery--%>
     <script src="<%= ResolveUrl("~/Scripts/Jquery/jquery-3.6.3.js") %>"></script>
     <script src="<%= ResolveUrl("~/Scripts/Jquery/blockUI.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/Jquery/ohsnap.js") %>"></script>
+    <script src="<%= ResolveUrl("~/Scripts/Jquery/ConsumoAlertas.js") %>"></script>
     <%--<script src="/Scripts/Jquery/jquery-3.6.3.js"></script>--%>
 
 
@@ -68,6 +70,7 @@
                 
             </asp:ContentPlaceHolder>
         </div>
+        <div id="ohsnap"></div>
     </div>
     <!--FIN CUERPO-->
 

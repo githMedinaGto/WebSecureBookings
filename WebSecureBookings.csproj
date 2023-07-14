@@ -116,6 +116,7 @@
     <Content Include="Scripts\eventcalendar-timeline-time-griddemo\readme.txt" />
     <Content Include="Scripts\Jquery\AccionesModales.js" />
     <Content Include="Scripts\Jquery\blockUI.js" />
+    <Content Include="Scripts\Jquery\ConsumoAlertas.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales-all.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales-all.min.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales\af.js" />
@@ -201,7 +202,10 @@
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.css" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.js" />
     <Content Include="Scripts\Jquery\jquery-3.6.3.js" />
+    <Content Include="Scripts\Jquery\ohsnap.js" />
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
+    <Content Include="Views\VistaCitas\VistaCitas.aspx" />
+    <Content Include="Views\VistaCitas\VistaCitas.js" />
     <Content Include="Views\Index\Index.aspx" />
     <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
@@ -211,6 +215,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Controllers\VistaCitas\VistaCitasController.cs" />
     <Compile Include="App_Data\Controllers\Index\IndexController.cs" />
     <Compile Include="App_Data\Controllers\PerfilesProfesionistas\PerfilesProfesionistasController.cs" />
     <Compile Include="App_Data\Models\ActaConfirmacionCita\ActaModel.cs" />
@@ -238,6 +243,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BD.edmx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Controllers\Encriptacion\EncriptionController.cs" />
+    <Compile Include="App_Data\Models\ManejoDeErrores\ManejoDeErroresModel.cs" />
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -273,6 +280,13 @@
     </Compile>
     <Compile Include="App_Data\Models\tUsuario.cs">
       <DependentUpon>BD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.designer.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Index\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
