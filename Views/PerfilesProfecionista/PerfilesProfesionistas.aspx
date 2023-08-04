@@ -6,6 +6,7 @@
 
     <script src="../../Scripts/Jquery/AccionesModales.js"></script>
     <script src="../../Scripts/Jquery/ValidacionCaracteres.js"></script>
+    <script src="../../Scripts/Jquery/ConsumoAlertas.js"></script>
     <script src="PerfilesProfesionistas.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
