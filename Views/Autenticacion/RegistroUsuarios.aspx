@@ -36,19 +36,18 @@
                 <h3>Iniciar sesión</h3>
                 <span>o utilice su cuenta</span>
 
-                <form id="form_input_login">
+                <form id="form_input">
                     <div class="type">
-                        <input type="email" class="form-control" placeholder="Correo" name="" id="email">
+                        <input type="email" class="form-control" placeholder="Correo" id="email">
                     </div>
                     <div class="type">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="" id="password">
+                        <input type="password" class="form-control" placeholder="Contraseña" id="password" >
                     </div>
 
                     <div class="forgot">
                         <span>¿Ha olvidado su contraseña?</span>
                     </div>
-
-                    <button class="btn bkg">Acceder</button>
+                    <button type="button" class="btn bkg" onclick="iniciarSesion()">Acceder</button>
                 </form>
             </div>
 

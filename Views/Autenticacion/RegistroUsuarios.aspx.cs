@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebSecureBookings.App_Data.Controllers.Autenticacion;
 
 namespace WebSecureBookings.Views.RegistroUsuarios
 {
@@ -12,15 +14,16 @@ namespace WebSecureBookings.Views.RegistroUsuarios
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
 
         }
 
         [WebMethod]
-        public static ResponseModel<string> PostCrearCliente(int sRol, string sApellidoP, string sApellidoM, string sCorreo, string sPassword,string sNombre)
+        public static ResponseModel<string> PostCrearCliente(int sRol, string sNombre, string sApellidoP, string sApellidoM, string sCorreo, string sPassword)
         {
             RegristroUsuariosController registroController = new RegristroUsuariosController();
 
-            return registroController.PostCrearCliente(sRol, sApellidoP, sApellidoM, sCorreo, sPassword, sNombre);
+            return registroController.PostCrearCliente(sRol, sNombre, sApellidoP, sApellidoM, sCorreo, sPassword);
         }
 
 
@@ -31,5 +34,14 @@ namespace WebSecureBookings.Views.RegistroUsuarios
 
             return registroControllerP.PostCrearProfesionista(sRol, sNombre, sApellidoP, sApellidoM, sCorreop, sPassword01, sProfesion, sTelefono, sArea, sMunicipio, sColonia, sCalle, sUbicacion);
         }
+
+        [WebMethod]
+        public static ResponseModel<string> IniciarSesion(string usuario, string contrasena)
+        {
+            AutenticacionController autenticar = new AutenticacionController();
+
+            return autenticar.IniciarSesion(usuario, contrasena);
+        }
+
     }
 }

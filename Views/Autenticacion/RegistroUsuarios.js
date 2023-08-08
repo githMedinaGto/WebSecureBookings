@@ -173,69 +173,33 @@ function fn_AgregarCliente() {
 
 
 
+function iniciarSesion() {
+    var usuario = document.getElementById("email").value;
+    var contrasena = document.getElementById("password").value;
 
+    //if (usuario == "usuario@gmail.com" && contrasena == "123") {
+    //    window.location.href = "https://localhost:44372/Views/index/index.aspx?";
+    //} else {
+    //    console.log("Error");
+    //}
+    if (usuario == "usuario@gmail.com") {
+        $.ajax({
+            url: "RegistroUsuarios.aspx/IniciarSesion", // URL de la solicitud
+            data: JSON.stringify({ usuario: usuario, contrasena: contrasena }), // Datos a enviar en formato JSON
+            type: "POST", // Método de la solicitud (POST en este caso)
+            dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
+            contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+            success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+                //Acceder a las propiedades del objeto dentro del array
+                var obj = data.d;
+                window.location.href = "https://localhost:44372/Views/index/index.aspx?";
+                console.log(data.d);
+            },
+            error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+                console.log(status); // Imprime el estado del error
+            }
+        }); 
+    }
 
-
-
-
-
-
-
-
-
-
-//    if (sRol != "") {
-//        // Obtener referencias a los campos que deseas validar
-//        //var input1 = document.getElementById("txtName");
-//        //var input2 = document.getElementById("txtApP");
-//        //var input3 = document.getElementById("txtApM");
-//        //var input4 = document.getElementById("txtEmail");
-//        //var input5 = document.getElementById("txtPassword");
-//        //var input6 = document.getElementById("txtRol");
-
-//        //// Realizar la validación de los campos
-//        //var validacion1 = validarTexto(input1, 4, 50);
-//        //var validacion2 = validarTexto(input2, 4, 300);
-//        //var validacion3 = validarTexto(input2, 4, 300);
-//        //var validacion4 = validarTexto(input2, 4, 300);
-//        //var validacion5 = validarTexto(input2, 4, 300);
-//        //var validacion6 = validarTexto(input2, 4, 300);
-
-//        // Verificar si no hay errores de validación antes de ejecutar la función fn_AgregarRol
-//        /*if (validacion1 && validacion2 && validacion3 && validacion4 && validacion4 && validacion5 && validacion6) {*/
-//            $.ajax({
-//                url: "InicioSesion.aspx/PostCrearCliente", // URL de la solicitud
-//                data: JSON.stringify({ sRol: sRol, sNombre: sNombre, sApellidoP: sApellidoP, sApellidoM: sApellidoM, sCorreo: sCorreo, sPassword: sPassword }), // Datos a enviar en formato JSON
-//                type: "POST", // Método de la solicitud (POST en este caso)
-//                dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
-//                contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
-//                success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
-//                    //Acceder a las propiedades del objeto dentro del array
-//                    //var obj = data.d;
-
-//                    //if (obj.StatusCode == 200) {
-//                    //    fn_CerrarModal('exampleModalCenter');
-//                    //    GetTablaRoles();
-//                    //    console.log(obj.Message);
-
-//                    //} else {
-//                    //    console.log(obj.StatusCode);
-//                    //    console.log(obj.Message);
-//                    //}
-//                    console.log(response);
-//                },
-//                error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-//                    console.log(status); // Imprime el estado del error
-//                }
-//            });
-
-
-//        //} else if (sRol == "" && sDescripcion == "") {
-//        //    error = '<span style="color: red;">Favor de contestar el formulario</span>';
-//        //    $('#txtDescripcion').after($(error).fadeOut(2000));
-//        //}
-//        //fn_unBlock();
-
-//    }
-
-//}
+    
+}
