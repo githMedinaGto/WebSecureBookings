@@ -182,7 +182,15 @@ function iniciarSesion() {
     //} else {
     //    console.log("Error");
     //}
-    if (usuario == "usuario@gmail.com") {
+
+    var input1 = document.getElementById("email");
+    var input2 = document.getElementById("password");
+
+    // Realizar la validación de los campos
+    var validacionEmail = validarTexto(input1, 4, 50);
+    var validacionPassword = validarTexto(input2, 8, 12);
+
+    if (validacionEmail && validacionPassword) {
         $.ajax({
             url: "RegistroUsuarios.aspx/IniciarSesion", // URL de la solicitud
             data: JSON.stringify({ usuario: usuario, contrasena: contrasena }), // Datos a enviar en formato JSON
@@ -192,14 +200,44 @@ function iniciarSesion() {
             success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
                 //Acceder a las propiedades del objeto dentro del array
                 var obj = data.d;
-                window.location.href = "https://localhost:44372/Views/index/index.aspx?";
                 console.log(data.d);
             },
             error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
                 console.log(status); // Imprime el estado del error
             }
         }); 
+    } else {
+        //Mandamos mensaje
     }
 
     
+}
+
+
+
+
+
+function fn_Map(latitud, longitud) {
+    // Configura tu token de acceso a Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5tZWRpbmEiLCJhIjoiY2t3am5ndGs3MHFxeDJ1cXZ5Z2Z0enZwdCJ9.-IeXyNNpFbRta6WDxASIrA';
+
+    // Crea una instancia del mapa
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [longitud, latitud], // Coordenadas del centro del mapa (longitud, latitud)
+        zoom: 16 // Nivel de zoom inicial
+    });
+
+    // Agrega un marcador en la ubicación deseada
+    var marker = new mapboxgl.Marker()
+        .setLngLat([longitud, latitud]) // Coordenadas del marcador (longitud, latitud)
+        .addTo(map);
+
+    // Devuelve las coordenadas como un objeto
+    return {
+        latitud: latitud,
+        longitud: longitud
+    };
+
 }
