@@ -56,8 +56,7 @@ function GetProfesionistas() {
             if (obj.StatusCode == 200) {
                 $("#div-profesionales").html(obj.Resultado);
             } else {
-                console.log(obj.StatusCode);
-                console.log(obj.Message);
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
             }
 
             var btnLimpiar = document.getElementById("btnLimpiarFiltro");
@@ -66,7 +65,7 @@ function GetProfesionistas() {
             }
         },
         error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-            console.log(status); // Imprime el estado del error
+            fn_Error(status); // Imprime el estado del error
         }
     });
     fn_unBlock();
@@ -90,12 +89,11 @@ function GetProfesion() {
             if (obj.StatusCode == 200) {
                 $("#cboProfeciones").html(obj.Resultado);
             } else {
-                console.log(obj.StatusCode);
-                console.log(obj.Message);
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
             }
         },
         error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-            console.log(status); // Imprime el estado del error
+            fn_Error(status); // Imprime el estado del error
         }
     });
     fn_unBlock();
@@ -118,12 +116,11 @@ function GetCiudades() {
             if (obj.StatusCode == 200) {
                 $("#cboCiudades").html(obj.Resultado);
             } else {
-                console.log(obj.StatusCode);
-                console.log(obj.Message);
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
             }
         },
         error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-            console.log(status); // Imprime el estado del error
+            fn_Error(status); // Imprime el estado del error
         }
     });
     fn_unBlock();
@@ -163,12 +160,11 @@ function fn_getBusqueda() {
                         btnLimpiar.style.display = "block";
                     }
                 } else {
-                    console.log(obj.StatusCode);
-                    console.log(obj.Message);
+                    fn_Error(obj.StatusCode + "\n" + obj.Message);
                 }
             },
             error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-                console.log(status); // Imprime el estado del error
+                fn_Error(status); // Imprime el estado del error
             }
         });
     } else {
@@ -196,12 +192,11 @@ function mostrarInfo(idUsuario) {
                 fn_AbrirModal('modalGenerarCita');
                 iIdUsuario = idUsuario;
             } else {
-                console.log(obj.StatusCode);
-                console.log(obj.Message);
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
             }
         },
         error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-            console.log(status); // Imprime el estado del error
+            fn_Error(status); // Imprime el estado del error
         }
     });
     fn_unBlock();
@@ -265,15 +260,14 @@ function fn_GenerarCalendario() {
                 // Seleccionar el elemento por defecto
                 $("#nav-tabContent .tab-pane:first").addClass("active show");
             } else {
-                console.log(obj.StatusCode);
-                console.log(obj.Message);
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
             }
 
             
 
         },
         error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-            console.log(status); // Imprime el estado del error
+            fn_Error(status); // Imprime el estado del error
             fn_unBlock();
         }
     });
@@ -310,12 +304,11 @@ function fn_GenerarCita() {
                     console.log(obj.Message);
 
                 } else {
-                    console.log(obj.StatusCode);
-                    console.log(obj.Message);
+                    fn_Error(obj.StatusCode + "\n" + obj.Message);
                 }
             },
             error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
-                console.log(status); // Imprime el estado del error
+                fn_Error(status); // Imprime el estado del error
             }
         });
     }
