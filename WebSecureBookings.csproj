@@ -210,6 +210,7 @@
     <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.js" />
+    <Content Include="Views\PerfilUsuario\PerfilUsuario.aspx" />
     <Content Include="Views\RegistroUsuarios\RegistroUsuarios.aspx" />
     <Content Include="Views\RegistroUsuarios\RegistroUsuarios.js" />
     <Content Include="Web.config" />
@@ -302,6 +303,12 @@
     <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.designer.cs">
       <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\PerfilUsuario\PerfilUsuario.aspx.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\PerfilUsuario\PerfilUsuario.aspx.designer.cs">
+      <DependentUpon>PerfilUsuario.aspx</DependentUpon>
     <Compile Include="Views\RegistroUsuarios\RegistroUsuarios.aspx.cs">
       <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
