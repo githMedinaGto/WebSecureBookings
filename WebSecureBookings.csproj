@@ -97,20 +97,26 @@
     <Content Include="Assests\Img\loading-cargando.gif" />
     <Content Include="Assests\Img\Logo 1.jpeg" />
     <Content Include="Assests\Img\Logo 2.jpeg" />
-    <Content Include="App_Data\Models\DB.Context.tt">
+    <Content Include="App_Data\Models\BD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB.edmx</DependentUpon>
-      <LastGenOutput>DB.Context.cs</LastGenOutput>
+      <DependentUpon>BD.edmx</DependentUpon>
+      <LastGenOutput>BD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Data\Models\DB.tt">
+    <Content Include="App_Data\Models\BD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB.edmx</DependentUpon>
-      <LastGenOutput>DB.cs</LastGenOutput>
+      <DependentUpon>BD.edmx</DependentUpon>
+      <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\Css\RegistroUsuarios.css" />
     <Content Include="Scripts\Css\Style.css" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\css\mobiscroll.javascript.min.css" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\eventcalendar_timeline-time-grid.html" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\js\mobiscroll.javascript.min.js" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\readme.txt" />
     <Content Include="Scripts\Jquery\AccionesModales.js" />
     <Content Include="Scripts\Jquery\blockUI.js" />
+    <Content Include="Scripts\Jquery\ConsumoAlertas.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales-all.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales-all.min.js" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\locales\af.js" />
@@ -196,15 +202,21 @@
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.css" />
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.js" />
     <Content Include="Scripts\Jquery\jquery-3.6.3.js" />
+    <Content Include="Scripts\Jquery\ohsnap.js" />
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
+    <Content Include="Views\VistaCitas\VistaCitas.aspx" />
+    <Content Include="Views\VistaCitas\VistaCitas.js" />
     <Content Include="Views\Index\Index.aspx" />
     <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.js" />
     <Content Include="Views\PerfilUsuario\PerfilUsuario.aspx" />
+    <Content Include="Views\RegistroUsuarios\RegistroUsuarios.aspx" />
+    <Content Include="Views\RegistroUsuarios\RegistroUsuarios.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Controllers\VistaCitas\VistaCitasController.cs" />
     <Compile Include="App_Data\Controllers\Index\IndexController.cs" />
     <Compile Include="App_Data\Controllers\PerfilesProfesionistas\PerfilesProfesionistasController.cs" />
     <Compile Include="App_Data\Models\ActaConfirmacionCita\ActaModel.cs" />
@@ -217,21 +229,23 @@
     <Compile Include="App_Data\Models\ResponseModel.cs" />
     <Compile Include="App_Data\Models\Rol\RolModel.cs" />
     <Compile Include="App_Data\Models\Usuario\UsuarioModel.cs" />
-    <Compile Include="App_Data\Models\DB.Context.cs">
+    <Compile Include="App_Data\Models\BD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB.Context.tt</DependentUpon>
+      <DependentUpon>BD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Models\DB.cs">
+    <Compile Include="App_Data\Models\BD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Models\DB.Designer.cs">
+    <Compile Include="App_Data\Models\BD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB.edmx</DependentUpon>
+      <DependentUpon>BD.edmx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Controllers\Encriptacion\EncriptionController.cs" />
+    <Compile Include="App_Data\Models\ManejoDeErrores\ManejoDeErroresModel.cs" />
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -240,35 +254,40 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App_Data\Models\sysdiagrams.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="App_Data\Controllers\RegistroUsuarios\RegristroUsuariosController.cs" />
     <Compile Include="App_Data\Models\tActaConfirmacionCita.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tCalendario.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tCometario.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tDia.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tEstado.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tMenu.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tMunicipio.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tRol.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Models\tUsuario.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>BD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\VistaCitas\VistaCitas.aspx.designer.cs">
+      <DependentUpon>VistaCitas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Index\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -290,18 +309,26 @@
     </Compile>
     <Compile Include="Views\PerfilUsuario\PerfilUsuario.aspx.designer.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+    <Compile Include="Views\RegistroUsuarios\RegistroUsuarios.aspx.cs">
+      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RegistroUsuarios\RegistroUsuarios.aspx.designer.cs">
+      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />
-    <EntityDeploy Include="App_Data\Models\DB.edmx">
+    <EntityDeploy Include="App_Data\Models\BD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+      <LastGenOutput>BD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="App_Data\Models\DB.edmx.diagram">
-      <DependentUpon>DB.edmx</DependentUpon>
+    <Content Include="App_Data\Models\BD.edmx.diagram">
+      <DependentUpon>BD.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\css\icons_mobiscroll.ttf" />
+    <Content Include="Scripts\eventcalendar-timeline-time-griddemo\css\icons_mobiscroll.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

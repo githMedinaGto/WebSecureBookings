@@ -4,15 +4,9 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
 
-    <!-- Importaciones de las bibliotecas FullCalendar y Moment.js -->
-    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>--%>
-    <link href="../../Scripts/Jquery/FullCalendar/lib/main.css" rel="stylesheet" />
-    <script src="../../Scripts/Jquery/FullCalendar/lib/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-
     <script src="../../Scripts/Jquery/AccionesModales.js"></script>
     <script src="../../Scripts/Jquery/ValidacionCaracteres.js"></script>
+    <script src="../../Scripts/Jquery/ConsumoAlertas.js"></script>
     <script src="PerfilesProfesionistas.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
@@ -67,13 +61,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="tab-content">
-                        <div id='calendar'></div>
+                    <div class="tab-content" id="contect-calendario">
+                        <%--<div id='calendar'></div>--%>
+                        <nav>
+                            <div class="nav custom-nav-tabs nav-justified" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-lunes-tab" data-bs-toggle="tab" data-bs-target="#nav-lunes" type="button" role="tab" aria-controls="nav-lunes" aria-selected="true">Lunes</button>
+                                <button class="nav-link" id="nav-mares-tab" data-bs-toggle="tab" data-bs-target="#nav-martes" type="button" role="tab" aria-controls="nav-martes" aria-selected="false">Martes</button>
+                                <button class="nav-link" id="nav-miercoles-tab" data-bs-toggle="tab" data-bs-target="#nav-miercoles" type="button" role="tab" aria-controls="nav-miercoles" aria-selected="false">Miercoles</button>
+                                <button class="nav-link" id="nav-jueves-tab" data-bs-toggle="tab" data-bs-target="#nav-jueves" type="button" role="tab" aria-controls="nav-jueves" aria-selected="false">Jueves</button>
+                                <button class="nav-link" id="nav-viernes-tab" data-bs-toggle="tab" data-bs-target="#nav-viernes" type="button" role="tab" aria-controls="nav-viernes" aria-selected="false">Viernes</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="JavaScript:$('#modalCalendario').modal('hide');">Cancelar</button>
-<%--                    <button type="button" class="btn btn-used" id="btnGenerar">Generar Cita</button>--%>
+                    <%--                    <button type="button" class="btn btn-used" id="btnGenerar">Generar Cita</button>--%>
                 </div>
             </div>
         </div>
