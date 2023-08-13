@@ -1,0 +1,116 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PerfilUsuario.aspx.cs" Inherits="WebSecureBookings.Views.PerfilUsuario.PerfilUsuario" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .rounded-input {
+            border-radius: 5px;
+            padding: 5px;
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        .rounded-button {
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .rounded-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .rounded-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .rounded-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .rounded-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked + .rounded-slider {
+            background-color: #4CAF50;
+        }
+        input:focus + .rounded-slider {
+            box-shadow: 0 0 1px #4CAF50;
+        }
+        input:checked + .rounded-slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+    <div>
+        <label for="txtNombre">Nombre:</label>
+        <br />
+        <asp:TextBox ID="txtNombre" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtApellidoPaterno">Apellido Paterno:</label>
+        <br />
+        <asp:TextBox ID="txtApellidoPaterno" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtApellidoMaterno">Apellido Materno:</label>
+        <br />
+        <asp:TextBox ID="txtApellidoMaterno" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtCorreo">Correo:</label>
+        <br />
+        <asp:TextBox ID="txtCorreo" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtTelefono">Teléfono:</label>
+        <br />
+        <asp:TextBox ID="txtTelefono" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtProfesion">Profesión:</label>
+        <br />
+        <asp:TextBox ID="txtProfesion" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="txtUbicacion">Ubicación:</label>
+        <br />
+        <asp:TextBox ID="txtUbicacion" runat="server" CssClass="rounded-input"></asp:TextBox>
+    </div>
+    <div>
+        <label for="fileFoto">Foto de Perfil:</label>
+        <br />
+        <asp:FileUpload ID="fileFoto" runat="server" CssClass="rounded-input" />
+    </div>
+    <div>
+        <asp:Button ID="btnGuardar" runat="server" Text="Guardar/Actualizar" CssClass="rounded-button" OnClick="btnGuardar_Click" />
+    </div>
+    <div>
+        <label>Switch:</label>
+        <br />
+        <label class="rounded-switch">
+            <asp:CheckBox ID="chkSwitch" runat="server" AutoPostBack="true" OnCheckedChanged="chkSwitch_CheckedChanged" />
+            <span class="rounded-slider"></span>
+        </label>
+    </div>
+</asp:Content>
