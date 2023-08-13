@@ -4,17 +4,20 @@
 
     <script src="../../Scripts/Jquery/ValidacionCaracteres.js"></script>
     <script src="../../Scripts/Jquery/AccionesModales.js"></script>
+    <script src="https://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
     <script src="Index.js"></script>
+    <%--<script src="Token.js"></script>--%>
 </asp:Content> 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <br />
     <div class="row" style="width: 100%;">
-        <div class="col-md-10 text-center">
+        <div class="col-md-8 text-center">
             <h1 style="color: #3385d9">Registro de Roles</h1>
         </div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-4 text-right">
             <br />
             <button id="btnRegistrar" type="button" class="btn btn-used">Nuevo Rol</button>
+            <button id="btnLogin" type="button" class="btn btn-used">Token</button>
         </div>
         <div class="col-md-12 center">
             <hr style="width: auto; height: 3px; background: #caebf2">
