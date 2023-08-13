@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebSecureBookings.App_Data.Controllers.Autenticacion;
 
 namespace WebSecureBookings.Views.RegistroUsuarios
 {
@@ -16,11 +19,11 @@ namespace WebSecureBookings.Views.RegistroUsuarios
         }
 
         [WebMethod]
-        public static ResponseModel<string> PostCrearCliente(int sRol, string sApellidoP, string sApellidoM, string sCorreo, string sPassword,string sNombre)
+        public static ResponseModel<string> PostCrearCliente(int sRol, string sNombre, string sApellidoP, string sApellidoM, string sCorreo, string sPassword)
         {
             RegristroUsuariosController registroController = new RegristroUsuariosController();
 
-            return registroController.PostCrearCliente(sRol, sApellidoP, sApellidoM, sCorreo, sPassword, sNombre);
+            return registroController.PostCrearCliente(sRol, sNombre, sApellidoP, sApellidoM, sCorreo, sPassword);
         }
 
 
@@ -28,8 +31,16 @@ namespace WebSecureBookings.Views.RegistroUsuarios
         public static ResponseModel<string> PostCrearProfesionista(int sRol, string sNombre, string sApellidoP, string sApellidoM, string sCorreop, string sPassword01, string sProfesion, string sTelefono, string sArea, int sMunicipio, string sColonia, string sCalle, string sUbicacion)
         {
             RegristroUsuariosController registroControllerP = new RegristroUsuariosController();
-
             return registroControllerP.PostCrearProfesionista(sRol, sNombre, sApellidoP, sApellidoM, sCorreop, sPassword01, sProfesion, sTelefono, sArea, sMunicipio, sColonia, sCalle, sUbicacion);
         }
+
+        [WebMethod]
+        public static ResponseModel<string> IniciarSesion(string usuario, string contrasena)
+        {
+            AutenticacionController autenticar = new AutenticacionController();
+
+            return autenticar.IniciarSesion(usuario, contrasena);
+        }
+
     }
 }

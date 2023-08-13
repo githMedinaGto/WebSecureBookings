@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroUsuarios.aspx.cs" Inherits="WebSecureBookings.Views.RegistroUsuarios.RegistroUsuarios" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroUsuarios.aspx.cs" Inherits="WebSecureBookings.Views.Autenticacion.RegistroUsuarios" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,6 +7,9 @@
     <!-- Incluimos los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/53601ddadf.js" crossorigin="anonymous"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
     <!-- CSS de Prism.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
 
@@ -36,19 +39,18 @@
                 <h3>Iniciar sesión</h3>
                 <span>o utilice su cuenta</span>
 
-                <form id="form_input_login">
+                <form id="form_input">
                     <div class="type">
-                        <input type="email" class="form-control" placeholder="Correo" name="" id="email">
+                        <input type="email" class="form-control" placeholder="Correo" id="email">
                     </div>
                     <div class="type">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="" id="password">
+                        <input type="password" class="form-control" placeholder="Contraseña" id="password" >
                     </div>
 
                     <div class="forgot">
                         <span>¿Ha olvidado su contraseña?</span>
                     </div>
-
-                    <button class="btn bkg">Acceder</button>
+                    <button type="button" class="btn bkg" onclick="iniciarSesion()">Acceder</button>
                 </form>
             </div>
 
@@ -56,7 +58,7 @@
                 <h3>Regístrarse</h3>
                 <%--<span>o utilice su correo electrónico para registrarse</span>--%>
 
-                <form id="form_input_registro">
+                <form id="form_input">
                     <div class="type">
 
                         <input type="text" class="form-control" placeholder="Nombre(s)" id="txtName">
@@ -83,7 +85,7 @@
 
 
         <!-- Modal para registro de clientes -->
-        <div class="modal fade" id="mRegistrClientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal" id="mRegistrClientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -95,7 +97,7 @@
                 <div class="modal-body">
                     <div class="tab-content">
                         <div class="row">
-                             <form id="form_input_cliente">
+                             <form id="form_input">
                         <div class="type">
                             
                             <input type="email" class="form-control" placeholder="Correo Electronico" id="txtCorreo">
@@ -120,84 +122,147 @@
         </div>
     </div>
 
-        <!-- Modal para registro de profesionistas -->
-        <div class="modal fade" id="mRegistroProfesionista" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitulo">Nuevo Rol</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="JavaScript:$('#exampleModalCenter').modal('hide');">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content">
-                        <div class="row">
 
-                            <div style="width: 50%; float:left">
-                                <form id="form_input_profesionista">
-                                     <div class="type">
-                            
-                            <input type="email" class="form-control" placeholder="Correo Electronico" id="txtCorreop">
-                        </div> 
-                        <div class="type">
-    
-                            <input type="password" class="form-control" placeholder="Contraseña" id="txtPassword01">
-                        </div>
-                        <div class="type">
-                            
-                            <input type="password" class="form-control" placeholder="Repita su Contraseña" id="txtPassword02">
-                        </div> 
-                         <div class="type">
-                            
-                            <input type="number" class="form-control" placeholder="Telefono" id="NumTelefono">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Area de especializacion" id="txtArea">
-                        </div> 
-                                </form>
-                            </div> 
-                            <div style="width: 50%; float:right">
-                                <form id="from_input">
-                                     <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Profesion" id="txtProfesion">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Municipio" id="txtMunicipio">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Colonia" id="txtColonia">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Calle" id="txtCalle">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Ubicacion" id="txtUbicacion">
-                        </div> 
-                        <div class="type">
-                            
-                            <input type="text" class="form-control" placeholder="Horario de atencion" id="txtHora">
-                        </div> 
-                                </form>
+
+        <div class="modal" id="mRegistroProfesionista" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered custom-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Encabezado del modal -->
+                    </div>
+                    <div class="modal-body">
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-md-4 custom-column">
+                                    <!-- Contenido de la primera columna -->
+                                    <div class="form-group">
+                                    <label for="txtCorreop">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="txtCorreop" placeholder="Correo Electrónico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtPassword01">Contraseña</label>
+                                    <input type="password" class="form-control" id="txtPassword01" placeholder="Contraseña">
+                                </div>
+                                <div class="type">
+                                    <label for="txtPassword01">Contraseña</label>
+                                    <input type="password" class="form-control" placeholder="Repita su Contraseña" id="txtPassword02">
+                                </div>
+                                <div class="type">
+                                    <label for="txtPassword01">Numero de telefono</label>
+                                    <input type="number" class="form-control" placeholder="Telefono" id="NumTelefono">
+                                </div>
+                                </div>
+                                <div class="col-md-4 custom-column">
+                                    <!-- Contenido de la segunda columna -->
+                                </div>
+                                <div class="col-md-4 custom-column">
+                                    <!-- Contenido de la tercera columna -->
+                                </div>
                             </div>
-
-
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn bkg" data-dismiss="modal" onclick="JavaScript:$('#exampleModalCenter').modal('hide');">Cancelar</button>
-                    <button type="button" class="btn bkg" onclick="fn_AgregarCliente()">Guardar</button>
+                    <div class="modal-footer">
+                        <!-- Pie del modal -->
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+        <!-- Modal para el registro del usuario profesionista -->
+<%--<div class="modal" id="mRegistroProfesionista" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo">Nuevo Rol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="JavaScript:$('#exampleModalCenter').modal('hide');">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form id="form_input_1">
+                                <!-- Contenido de la primera columna -->
+                                <div class="form-group">
+                                    <label for="txtCorreop">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="txtCorreop" placeholder="Correo Electrónico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtPassword01">Contraseña</label>
+                                    <input type="password" class="form-control" id="txtPassword01" placeholder="Contraseña">
+                                </div>
+                                <div class="type">
+                                    <label for="txtPassword01">Contraseña</label>
+                                    <input type="password" class="form-control" placeholder="Repita su Contraseña" id="txtPassword02">
+                                </div>
+                                <div class="type">
+                                    <label for="txtPassword01">Numero de telefono</label>
+                                    <input type="number" class="form-control" placeholder="Telefono" id="NumTelefono">
+                                </div>
+                                <!-- Agrega más campos aquí -->
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form id="form_input_2">
+                                <!-- Contenido de la segunda columna -->
+                                <div class="form-group">
+                                    <label for="txtProfesion">Profesión</label>
+                                    <input type="text" class="form-control" id="txtProfesion" placeholder="Profesión">
+                                </div>
+                                <div class="type">
+                            
+                            <input type="text" class="form-control" placeholder="Area de especializacion" id="txtArea">
+                        </div>
+                                <!-- Agrega más campos aquí -->
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form id="form_input_3">
+                                <!-- Contenido de la tercera columna -->
+                                <div class="form-group">
+                                    <label for="txtMunicipio">Municipio:</label>
+                                    <input type="text" class="form-control" id="txtMunicipio" placeholder="Municipio">
+                                </div>
+                                <div class="type">
+                                    <label for="txtMunicipio">Colonia:</label>
+                                    <input type="text" class="form-control" placeholder="Colonia" id="txtColonia">
+                                </div>
+                                <div class="type">
+                                    <label for="txtMunicipio">Calle:</label>
+                                    <input type="text" class="form-control" placeholder="Calle" id="txtCalle">
+                                </div>
+                                <div class="type">
+                                    <label for="txtMunicipio">Ubicacion</label>
+                                    <div id="fn_Map" style="width: 100%; height: 400px;"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bkg" data-dismiss="modal" onclick="JavaScript:$('#exampleModalCenter').modal('hide');">Cancelar</button>
+                <button type="button" class="btn bkg" onclick="fn_AgregarCliente()">Guardar</button>
+            </div>
+        </div>
     </div>
+</div>--%>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
