@@ -38,6 +38,7 @@ namespace WebSecureBookings.App_Data.Models
         public string sUbicacion { get; set; }
         public Nullable<bool> bEstatus { get; set; }
         public string sToken { get; set; }
+        public string sPassword { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tActaConfirmacionCita> tActaConfirmacionCita { get; set; }

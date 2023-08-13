@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WebSecureBookings.App_Data.Models;
-
-namespace WebSecureBookings
+﻿namespace WebSecureBookings
 {
     public class DiaModel
     {
