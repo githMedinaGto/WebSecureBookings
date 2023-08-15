@@ -6,11 +6,17 @@ using System.Linq;
 using System.Data;
 using System.Web.UI.WebControls;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using System.Web.Caching;
+using System.Runtime.Caching;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace WebSecureBookings.Views.Index
 {
     public partial class Index : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -38,6 +44,8 @@ namespace WebSecureBookings.Views.Index
             string[] aColumnas = new string[] { "ROL", "DESCRIPCION", "ACCIONES" };
             string result = GenerateTableHtml(data.Data, aColumnas);
 
+            // Crea una instancia de la clase que contiene el método GetTokenFromCache()
+            var index = new Index();
             return new List<ResponseModel<string>>
         {
             new ResponseModel<string>
@@ -47,6 +55,23 @@ namespace WebSecureBookings.Views.Index
                 Resultado = result
             }
         };
+        }
+
+
+        public string GetTokenFromCache()
+        {
+            var cache = MemoryCache.Default;
+            // Obtén el token actual desde el caché
+            var token = cache.Select(kvp => kvp.Key).FirstOrDefault() as string;
+
+            // Verifica si se encontró un token en el caché
+            if (!string.IsNullOrEmpty(token))
+            {
+                return token;
+            }
+
+            // Si no se encontró ningún token en el caché, devuelve null o maneja el caso según tus necesidades
+            return null;
         }
 
         private static string GenerateTableHtml(List<RolModel> data, string[] aColumnas)
@@ -111,6 +136,26 @@ namespace WebSecureBookings.Views.Index
         {
             IndexController indexController = new IndexController();
             return indexController.DeleteRolId(idRol);
+        }
+
+        [WebMethod]
+        public static string GenerarUsuarioToken()
+        {
+            try
+            {
+                var userId = "123456";
+                var role = "admin";
+
+                var token = Generar_Token.GenerateToken(userId, role);
+                var obtenerToken = Generar_Token.GetTokenFromCache();
+                var inforToken = Generar_Token.DecodeToken(obtenerToken);
+                string url = Generar_Token.RedirecAPaginaPrincipal(obtenerToken);
+                return url;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

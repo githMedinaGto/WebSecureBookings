@@ -1,15 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebSecureBookings.App_Data.Controllers.Autenticacion;
 
-namespace WebSecureBookings.Views.RegistroUsuarios
+namespace WebSecureBookings.Views.Autenticacion
 {
     public partial class RegistroUsuarios : System.Web.UI.Page
     {

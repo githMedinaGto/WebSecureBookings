@@ -1,17 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Runtime.Caching;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 using System.Web;
-
 using System.Web.Mvc;
-using System.Web.Services.Description;
 using WebSecureBookings.App_Data.Models;
 
 namespace WebSecureBookings.App_Data.Controllers.Autenticacion
