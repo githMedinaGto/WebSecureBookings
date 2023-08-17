@@ -24,7 +24,7 @@ namespace WebSecureBookings
                     new Claim(ClaimTypes.NameIdentifier, userId),
                     new Claim(ClaimTypes.Role, role)
                 }),
-                    Expires = DateTime.UtcNow.AddSeconds(60),// Establece el tiempo de expiración a 2 minutos
+                    Expires = DateTime.UtcNow.AddSeconds(6000),// Establece el tiempo de expiración a 2 minutos
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
