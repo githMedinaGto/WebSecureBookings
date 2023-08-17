@@ -1,28 +1,37 @@
-﻿// Función para abrir el modal de calificar
-    function abrirModalCalificar(numeroCita) {
-        // Aquí puedes implementar la lógica para cargar los datos de la cita según su número
-        // y mostrarlos en el modal de calificación.
+﻿document.addEventListener("DOMContentLoaded", function () {
+    GetTablaCitas();
 
-        // Luego, muestra el modal
-        $("#modalCalificar").fadeIn();
-    }
+});
 
-    // Función para abrir el modal de eliminar
-    function abrirModalEliminar(numeroCita) {
-        // Aquí puedes implementar la lógica para cargar los datos de la cita según su número
-        // y mostrarlos en el modal de eliminación.
+//Función para llenar el combo de selección de liga
 
-        // Luego, muestra el modal
-        $("#modalEliminar").fadeIn();
-    }
+function GetTablaCitas() {
+    fn_block();
+    $("#divCitas").html("");
+    //Realiza una solicitud AJAX utilizando jQuery
+    $.ajax({
+        url: "VistaCitas.aspx/GetCitas", // URL de la solicitud
+        data: "", // Datos a enviar (vacío en este caso)
+        type: "POST", // Método de la solicitud (POST en este caso)
+        dataType: "JSON", // Tipo de datos esperado en la respuesta (JSON en este caso)
+        contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+        success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+            //Acceder a las propiedades del objeto dentro del array
+            var obj = data.d[0];
 
-    // Event listener para los botones de calificar y eliminar
-    $(document).on('click', '.btnCalificar', function() {
-        var numeroCita = $(this).closest('tr').find('td:eq(7)').text();
-        abrirModalCalificar(numeroCita);
+            if (obj.StatusCode == 200) {
+                $("#divCitas").html(obj.Resultado);
+            } else {
+                console.log(obj.StatusCode);
+            }
+        },
+        error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+            console.log(status); // Imprime el estado del error
+        }
     });
+    fn_unBlock();
+}
 
-    $(document).on('click', '.btnEliminar', function() {
-        var numeroCita = $(this).closest('tr').find('td:eq(7)').text();
-        abrirModalEliminar(numeroCita);
-    });
+function fn_Calificar(id) {
+    fn_AbrirModal('modalCalificar');
+}
