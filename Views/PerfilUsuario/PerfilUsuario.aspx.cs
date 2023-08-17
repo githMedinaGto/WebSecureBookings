@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Services;
+using WebSecureBookings.App_Data.Models;
 
 namespace WebSecureBookings.Views.PerfilUsuario
 {
@@ -13,96 +15,25 @@ namespace WebSecureBookings.Views.PerfilUsuario
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                // Cargar datos existentes del usuario desde la base de datos
-                CargarDatosUsuario();
-            }
+
+
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        [WebMethod]
+        public static ResponseModel<List<UsuarioModel>> GetUsuarioProfesionista()
         {
-            // Actualizar los datos del usuario en la base de datos
-            ActualizarDatosUsuario();
+            RegristroUsuariosController usuarioController = new RegristroUsuariosController();
+            var data = usuarioController.GetProfesionista();
+
+            return new ResponseModel<List<UsuarioModel>>
+            {
+                StatusCode = data.StatusCode,
+                Message = data.Message,
+                Data = data.Data
+            };
+
         }
 
-        protected void chkSwitch_CheckedChanged(object sender, EventArgs e)
-        {
-            // Lógica para manejar el cambio de estado del switch
-        }
-
-        private void CargarDatosUsuario()
-        {
-            // Obtener los datos del usuario desde la base de datos y asignarlos a los controles correspondientes
-            string connectionString = "";
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand("SELECT sNombre AS Nombre, sApellidoP AS ApellidoPaterno, sApellidoM AS ApellidoMaterno, sCorreo AS Correo, sTelefono AS Telefono, sProfecion AS Profesion, sUbicacion AS Ubicacion FROM tUsuario WHERE idUsuario = @UsuarioID;", connection);
-            command.Parameters.AddWithValue("@UsuarioID", "ID del usuario actual");
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    txtNombre.Text = reader["Nombre"].ToString();
-                    txtApellidoPaterno.Text = reader["ApellidoPaterno"].ToString();
-                    txtApellidoMaterno.Text = reader["ApellidoMaterno"].ToString();
-                    txtCorreo.Text = reader["Correo"].ToString();
-                    txtTelefono.Text = reader["Telefono"].ToString();
-                    txtProfesion.Text = reader["Profesion"].ToString();
-                    txtUbicacion.Text = reader["Ubicacion"].ToString();
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                // Manejar excepciones
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
-        private void ActualizarDatosUsuario()
-        {
-            // Obtener los valores actualizados de los controles y guardarlos en la base de datos
-            string nombre = txtNombre.Text;
-            string apellidoPaterno = txtApellidoPaterno.Text;
-            string apellidoMaterno = txtApellidoMaterno.Text;
-            string correo = txtCorreo.Text;
-            string telefono = txtTelefono.Text;
-            string profesion = txtProfesion.Text;
-            string ubicacion = txtUbicacion.Text;
-
-            string connectionString = "";
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand("UPDATE tUsuario SET sNombre = @Nombre, sApellidoP = @ApellidoPaterno, sApellidoM = @ApellidoMaterno, sCorreo = @Correo, sTelefono = @Telefono, sProfecion = @Profesion, sUbicacion = @Ubicacion WHERE idUsuario = @UsuarioID;", connection);
-            command.Parameters.AddWithValue("@Nombre", nombre);
-            command.Parameters.AddWithValue("@ApellidoPaterno", apellidoPaterno);
-            command.Parameters.AddWithValue("@ApellidoMaterno", apellidoMaterno);
-            command.Parameters.AddWithValue("@Correo", correo);
-            command.Parameters.AddWithValue("@Telefono", telefono);
-            command.Parameters.AddWithValue("@Profesion", profesion);
-            command.Parameters.AddWithValue("@Ubicacion", ubicacion);
-            command.Parameters.AddWithValue("@UsuarioID", "ID del usuario actual");
-
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                // Manejar excepciones
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
     }
+    
 }

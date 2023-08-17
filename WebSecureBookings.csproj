@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assests\Fotos\633262.png" />
     <Content Include="Assests\Img\loading-cargando.gif" />
     <Content Include="Assests\Img\Logo 1.jpeg" />
     <Content Include="Assests\Img\Logo 2.jpeg" />
@@ -204,6 +205,13 @@
     <Content Include="Scripts\Jquery\jquery-3.6.3.js" />
     <Content Include="Scripts\Jquery\ohsnap.js" />
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
+<<<<<<< Updated upstream
+=======
+    <Content Include="Views\Autenticacion\RegistroUsuarios.aspx" />
+    <Content Include="Views\Autenticacion\RegistroUsuarios.js" />
+    <Content Include="Views\PerfilUsuario\PerfilesUsuario.js" />
+    <Content Include="Views\PerfilUsuario\PerfilUsuario.aspx" />
+>>>>>>> Stashed changes
     <Content Include="Views\VistaCitas\VistaCitas.aspx" />
     <Content Include="Views\VistaCitas\VistaCitas.js" />
     <Content Include="Views\Index\Index.aspx" />
