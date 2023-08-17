@@ -467,91 +467,155 @@ namespace WebSecureBookings
 
                 var calendarios = query.ToList();
 
-                // Generar el contenido HTML para cada día de la semana y agregarlo a las variables de los strings respectivos
-                foreach (var calendario in calendarios)
+
+                //Generar el contenido HTML para cada día de la semana y agregarlo a las variables de los strings respectivos
+                //foreach (var calendario in calendarios)
+                //{
+
+                //    string sFecha = GenerarFecha(calendario.iDia);
+
+                //    DateTime hoy = DateTime.Today;
+                //    int numeroDia = (int)hoy.DayOfWeek;
+
+                //    switch (calendario.iDia)
+                //    {
+                //        case 1:
+                //            if(numeroDia <= 1)
+                //            {
+                //                sLunes += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                //                // Se agrega información relevante para cada elemento de la lista
+                //                sLunes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                //                sLunes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                //                sLunes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                //                sLunes += "<p>Fecha</p>";
+                //                sLunes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                //                sLunes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                //                sLunes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                //                sLunes += "</li>";
+                //            }
+
+                //            break;
+                //        case 2:
+                //            if(numeroDia <= 2)
+                //            {
+                //                sMartes += $"<li class=\"list-group-item\"  onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                //                sMartes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                //                sMartes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                //                sMartes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                //                sMartes += "<p>Fecha</p>";
+                //                sMartes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                //                sMartes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                //                sMartes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                //                sMartes += "</li>";
+                //            }
+                //            break;
+                //        case 3:
+                //            if(numeroDia <= 3)
+                //            {
+                //                sMiercoles += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                //                sMiercoles += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                //                sMiercoles += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                //                sMiercoles += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                //                sMiercoles += "<p>Fecha</p>";
+                //                sMiercoles += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                //                sMiercoles += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                //                sMiercoles += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                //                sMiercoles += "</li>";
+                //            }
+                //            break;
+                //        case 4:
+                //            if(numeroDia <= 4)
+                //            {
+                //                sJuevez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                //                sJuevez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                //                sJuevez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                //                sJuevez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                //                sJuevez += "<p>Fecha</p>";
+                //                sJuevez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
+                //                sJuevez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                //                sJuevez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                //                sJuevez += "</li>";
+                //            }
+                //            break;
+                //        case 5:
+                //            if(numeroDia <= 5)
+                //            {
+                //                sViernez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
+                //                sViernez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
+                //                sViernez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
+                //                sViernez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
+                //                sViernez += "<p>Fecha</p>";
+                //                sViernez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha} &nbsp;&nbsp;</span>";
+                //                sViernez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
+                //                sViernez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
+                //                sViernez += "</li>";
+                //            }
+                //            break;
+                //        // (Se repite el mismo patrón para los otros días de la semana)
+                //        // ...
+                //        default:
+                //            // Cerrar las etiquetas correspondientes para cada día de la semana
+                //            sLunes += "</ul>\r\n</div>";
+                //            sMartes += "</ul>\r\n</div>";
+                //            sMiercoles += "</ul>\r\n</div>";
+                //            sJuevez += "</ul>\r\n</div>";
+                //            sViernez += "</ul>\r\n</div>";
+                //            break;
+                //    }
+                //}
+
+                //// Cerrar las etiquetas de los contenedores de los días de la semana
+                //sLunes += "</ul>\r\n</div>";
+                //sMartes += "</ul>\r\n</div>";
+                //sMiercoles += "</ul>\r\n</div>";
+                //sJuevez += "</ul>\r\n</div>";
+                //sViernez += "</ul>\r\n</div>";
+
+                //// Unir todos los strings para obtener el resultado final con el contenido HTML completo del calendario
+                //string sCalendario = sLunes + sMartes + sJuevez + sViernez;
+
+                //// Devolver una respuesta exitosa con el calendario generado en formato HTML
+                //return new ResponseModel<List<CalendarioModel>>
+                //{
+                //    StatusCode = 200,
+                //    Message = "Datos obtenidos correctamente",
+                //    Resultado = sCalendario
+                //};
+                string[] diasSemana = { sLunes, sMartes, sMiercoles, sJuevez, sViernez };
+
+                DateTime hoy = DateTime.Today;
+                int numeroDia = (int)hoy.DayOfWeek;
+
+                for (int i = 0; i < calendarios.Count; i++)
                 {
+                    var calendario = calendarios[i];
                     string sFecha = GenerarFecha(calendario.iDia);
 
-                    switch (calendario.iDia)
+                    if (calendario.iDia >= 1 && calendario.iDia <= 5 && numeroDia <= calendario.iDia)
                     {
-                        case 1:
-                            sLunes += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
-                            // Se agrega información relevante para cada elemento de la lista
-                            sLunes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
-                            sLunes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
-                            sLunes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
-                            sLunes += "<p>Fecha</p>";
-                            sLunes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
-                            sLunes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
-                            sLunes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
-                            sLunes += "</li>";
-                            break;
-                        case 2:
-                            sMartes += $"<li class=\"list-group-item\"  onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
-                            sMartes += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
-                            sMartes += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
-                            sMartes += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
-                            sMartes += "<p>Fecha</p>";
-                            sMartes += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
-                            sMartes += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
-                            sMartes += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
-                            sMartes += "</li>";
-                            break;
-                        case 3:
-                            sMiercoles += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
-                            sMiercoles += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
-                            sMiercoles += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
-                            sMiercoles += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
-                            sMiercoles += "<p>Fecha</p>";
-                            sMiercoles += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
-                            sMiercoles += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
-                            sMiercoles += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
-                            sMiercoles += "</li>";
-                            break;
-                        case 4:
-                            sJuevez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
-                            sJuevez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
-                            sJuevez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
-                            sJuevez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
-                            sJuevez += "<p>Fecha</p>";
-                            sJuevez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp</span>";
-                            sJuevez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
-                            sJuevez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
-                            sJuevez += "</li>";
-                            break;
-                        case 5:
-                            sViernez += $"<li class=\"list-group-item\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">";
-                            sViernez += $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>";
-                            sViernez += $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>";
-                            sViernez += $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>";
-                            sViernez += "<p>Fecha</p>";
-                            sViernez += $"<span id=\"txtFecha{calendario.idDia}\">{sFecha} &nbsp;&nbsp;</span>";
-                            sViernez += $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - ";
-                            sViernez += $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>";
-                            sViernez += "</li>";
-                            break;
-                        // (Se repite el mismo patrón para los otros días de la semana)
-                        // ...
-                        default:
-                            // Cerrar las etiquetas correspondientes para cada día de la semana
-                            sLunes += "</ul>\r\n</div>";
-                            sMartes += "</ul>\r\n</div>";
-                            sMiercoles += "</ul>\r\n</div>";
-                            sJuevez += "</ul>\r\n</div>";
-                            sViernez += "</ul>\r\n</div>";
-                            break;
+                        string contenidoHtml = $"<li class=\"list-group-item\" >" +
+                                              $"<span id=\"txtIdCalendario{calendario.idDia}\" style=\"display: none;\">{calendario.idCalendario}</span>" +
+                                              $"<span id=\"txtIdUsuProfesionista{calendario.idDia}\" style=\"display: none;\">{calendario.idUsuarioP}</span>" +
+                                              $"<p id=\"txtTitulo{calendario.idDia}\"><b>Disponible</b></p>" +
+                                              "<p>Fecha</p>" +
+                                              $"<span id=\"txtFecha{calendario.idDia}\">{sFecha}&nbsp;&nbsp;</span>" +
+                                              $"<span id=\"txtHoaraInicio{calendario.idDia}\">{calendario.sHorarioInicio}</span> - " +
+                                              $"<span id=\"txtHoraFechaFin{calendario.idDia}\">{calendario.sHorarioFin}</span>" +
+                                              $"<button type=\"button\" class=\"btn btn-used float-end\" id=\"btAgendarCita\" onclick=\"JavaScript:fn_AbiriModalGenerarCita({calendario.idDia});\">Generar Evento</button>" +
+                                              "</li>";
+
+                        diasSemana[calendario.iDia - 1] += contenidoHtml;
                     }
                 }
 
                 // Cerrar las etiquetas de los contenedores de los días de la semana
-                sLunes += "</ul>\r\n</div>";
-                sMartes += "</ul>\r\n</div>";
-                sMiercoles += "</ul>\r\n</div>";
-                sJuevez += "</ul>\r\n</div>";
-                sViernez += "</ul>\r\n</div>";
+                for (int i = 0; i < diasSemana.Length; i++)
+                {
+                    diasSemana[i] += "</ul>\r\n</div>";
+                }
 
                 // Unir todos los strings para obtener el resultado final con el contenido HTML completo del calendario
-                string sCalendario = sLunes + sMartes + sJuevez + sViernez;
+                string sCalendario = string.Concat(diasSemana);
 
                 // Devolver una respuesta exitosa con el calendario generado en formato HTML
                 return new ResponseModel<List<CalendarioModel>>
@@ -560,6 +624,7 @@ namespace WebSecureBookings
                     Message = "Datos obtenidos correctamente",
                     Resultado = sCalendario
                 };
+
             }
         }
         #endregion
