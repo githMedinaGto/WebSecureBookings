@@ -127,7 +127,6 @@ namespace WebSecureBookings
                 // Establecer una conexión con la base de datos utilizando el contexto de entidad
                 using (var dbContext = new DB_WSBEntities())
                 {
-                    // Realizar una consulta para obtener una lista de estados y mapearlos a objetos de modelo de estado
                     var lst = (from d in dbContext.tEstado
                                select new EstadoModel
                                {
@@ -136,11 +135,15 @@ namespace WebSecureBookings
                                    idMunicipio = (int)d.idMunicipio
                                }).ToList();
 
+                    var uniqueStates = lst.GroupBy(e => e.sEstado)
+                                          .Select(group => group.First())
+                                          .ToList();
+
                     return new ResponseModel<List<EstadoModel>>
                     {
                         StatusCode = 200,
                         Message = "Datos obtenidos correctamente",
-                        Data = lst
+                        Data = uniqueStates
                     };
                 }
             }
@@ -160,7 +163,7 @@ namespace WebSecureBookings
 
         #region Metodo que obtiene los profesionistas por estado(Ciudad)
         [HttpGet]
-        public ResponseModel<List<UsuarioModel>> GetProfesionistasEstado( int iEstado)
+        public ResponseModel<List<UsuarioModel>> GetProfesionistasEstado( string sEstado)
         {
             try
             {
@@ -174,9 +177,9 @@ namespace WebSecureBookings
                         .Where(u => u.Usuario.bEstatus == true && u.Usuario.idRol == 1);
 
                     // Aplicar el filtro por estado si se proporciona un valor distinto de cero
-                    if (iEstado != 0)
+                    if (sEstado != "")
                     {
-                        query = query.Where(u => u.Estado.idEstado == iEstado);
+                        query = query.Where(u => u.Estado.sEstado == sEstado);
                     }
 
                     // Ejecutar la consulta y obtener los resultados
@@ -232,7 +235,7 @@ namespace WebSecureBookings
 
         #region Metodo que optiene los profesionistas por profesión
         [HttpGet]
-        public ResponseModel<List<UsuarioModel>> GetProfesionistasEstado(string sProfecion)
+        public ResponseModel<List<UsuarioModel>> GetProfesionistasProfesion(string sProfecion)
         {
             try
             {
@@ -304,7 +307,7 @@ namespace WebSecureBookings
 
         #region Metodo que obtiene profesionistas por profesion y estado
         [HttpGet]
-        public ResponseModel<List<UsuarioModel>> GetProfesionistasProfesionEstado(string sProfecion, int iEstado)
+        public ResponseModel<List<UsuarioModel>> GetProfesionistasProfesionEstado(string sProfecion, string sEstado)
         {
             try
             {
@@ -324,9 +327,9 @@ namespace WebSecureBookings
                     }
 
                     // Si se proporciona un estado específico, aplicar un filtro para obtener solo profesionistas de ese estado
-                    if (iEstado != 0)
+                    if (sEstado != "")
                     {
-                        query = query.Where(u => u.Estado.idEstado == iEstado);
+                        query = query.Where(u => u.Estado.sEstado == sEstado);
                     }
 
                     // Obtener los resultados de la consulta

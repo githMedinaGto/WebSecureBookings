@@ -109,7 +109,7 @@ namespace WebSecureBookings.Views.Perfilesprofecionista
 
             foreach (EstadoModel ciudad in data.Data)
             {
-                selectOptions += $"<option value=\"{ciudad.idEstado}\">{ciudad.sEstado}</option>";
+                selectOptions += $"<option value=\"{ciudad.sEstado}\">{ciudad.sEstado}</option>";
             }
 
             return new List<ResponseModel<string>>
@@ -126,19 +126,19 @@ namespace WebSecureBookings.Views.Perfilesprofecionista
         [WebMethod]
         public static List<ResponseModel<string>> GetProfesionistasFiltro(string sProfesion, string sEstado)
         {
-            int iEstado = int.Parse(sEstado);
+            //int iEstado = int.Parse(sEstado);
             var data = new ResponseModel<List<UsuarioModel>>(); // Inicializar con un valor predeterminado
             PerfilesProfesionistasController profesionistasController = new PerfilesProfesionistasController();
-            if (sProfesion != "0" && iEstado != 0)
+            if (sProfesion != "0" && sEstado != "0")
             {
-                data = profesionistasController.GetProfesionistasProfesionEstado(sProfesion, iEstado);
+                data = profesionistasController.GetProfesionistasProfesionEstado(sProfesion, sEstado);
             }else if(sProfesion != "0")
             {
-                data = profesionistasController.GetProfesionistasEstado(sProfesion);
+                data = profesionistasController.GetProfesionistasProfesion(sProfesion);
 
-            }else if(iEstado != 0)
+            }else if(sEstado != "0")
             {
-                data = profesionistasController.GetProfesionistasEstado(iEstado);
+                data = profesionistasController.GetProfesionistasEstado(sEstado);
             }
             
 
