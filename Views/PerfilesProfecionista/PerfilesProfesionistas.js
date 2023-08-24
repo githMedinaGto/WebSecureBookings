@@ -300,7 +300,7 @@ function fn_GenerarCita() {
     fn_block();
     var error = "";
 
-    var valorSpanFecha = document.getElementById("txtFecha" + idDia).innerHTML;
+    var valorSpanFecha = document.getElementById("txtFecha" + iIdDia).innerHTML;
 
     var sMotivo = $("#txtMotivo").val();
 
@@ -314,7 +314,12 @@ function fn_GenerarCita() {
         // Verificar si no hay errores de validación antes de ejecutar el ajax
         $.ajax({
             url: "PerfilesProfesionistas.aspx/PostAcata", // URL de la solicitud
-            data: JSON.stringify({ idUsuario: iIdUsuario, sMotivo: sMotivo, idCalendario: iIdCaldendario, secha: valorSpanFecha }), // Datos a enviar en formato JSON
+            data: JSON.stringify({
+                idUsuario: iIdUsuario,
+                sMotivo: sMotivo,
+                idCalendario: iIdCaldendario,
+                sFecha: valorSpanFecha
+            }), // Datos a enviar en formato JSON
             type: "POST", // Método de la solicitud (POST en este caso)
             dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
             contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud

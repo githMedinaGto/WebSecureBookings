@@ -531,6 +531,7 @@ namespace WebSecureBookings
                 Dictionary<string, string> i = Generar_Token.DecodeToken(token);
                 string userid = i[ClaimTypes.NameIdentifier];
                 int iduser = int.Parse(userid);
+                string cadenaSinEspacios = sFecha.Replace("&nbsp;&nbsp;", "");
                 // Usar el contexto de la base de datos con una declaración "using" para asegurarse de que se libere correctamente
                 using (var dbContext = new DB_WSBEntities())
                 {
@@ -542,7 +543,8 @@ namespace WebSecureBookings
                     oACC.idUsuarioC = iduser; // ID del usuario (quién crea la confirmación). Es fijo 14 o debería ser obtenido de alguna otra manera
                     oACC.idCalendario = idCalendario; // ID del calendario asociado a la confirmación
                     oACC.sMotivo = sMotivo; // Motivo de la confirmación
-                    oACC.dFechaRegistro = DateTime.ParseExact(sFecha, "yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture);
+                    oACC.dFechaRegistro = DateTime.ParseExact(cadenaSinEspacios, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    //oACC.dFechaRegistro = DateTime.ParseExact(sFecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     oACC.bEstatus = 1; // ¿Es 1 el valor correcto para indicar que la confirmación está activa?
 
                     // Agregar la nueva entrada a la tabla tActaConfirmacionCita
