@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebSecureBookings.Views.Index
+namespace WebSecureBookings
 {
 
 

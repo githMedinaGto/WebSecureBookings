@@ -203,21 +203,44 @@ function mostrarInfo(idUsuario) {
 }
 
 function fn_ConvertirCoordenadas(Ubicacion) {
-    // Dividir la cadena de coordenadas en latitud y longitud
-    var partes = Ubicacion.split(',');
+    var latitud = 0;
+    var longitud = 0;
 
-    // Extraer la latitud y eliminar los caracteres no deseados
-    var latitud = parseFloat(partes[0].replace('° N', '').trim());
+    // Verificar el formato de las coordenadas
+    if (Ubicacion.includes('"latitud":') && Ubicacion.includes('"longitud":')) {
+        // Formato: "latitud":21.1952063,"longitud":-100.9567593
+        var coordenadas = Ubicacion.match(/"latitud":(.*?),"longitud":(.*?)$/);
+        latitud = parseFloat(coordenadas[1]);
+        longitud = parseFloat(coordenadas[2]);
+    } else if (Ubicacion.includes('° N') && Ubicacion.includes('° W')) {
+        // Formato: 20.6597° N, 103.3496° W
+        var partes = Ubicacion.split(',');
 
-    // Extraer la longitud y eliminar los caracteres no deseados
-    var longitud = parseFloat(partes[1].replace('° W', '').trim());
+        for (var i = 0; i < partes.length; i++) {
+            var parte = partes[i].trim();
 
-    // Ajustar el signo de la longitud según la dirección
-    longitud = -longitud;
+            if (parte.includes('° N') || parte.includes('° S')) {
+                // Extraer la latitud y eliminar los caracteres no deseados
+                latitud = parseFloat(parte.replace('° N', '').replace('° S', '').trim());
 
-    // Verificar si la latitud está en el hemisferio sur
-    if (partes[0].includes('° S')) {
-        latitud = -latitud;
+                // Verificar si la latitud está en el hemisferio sur
+                if (parte.includes('° S')) {
+                    latitud = -latitud;
+                }
+            } else if (parte.includes('° E') || parte.includes('° W')) {
+                // Extraer la longitud y eliminar los caracteres no deseados
+                longitud = parseFloat(parte.replace('° E', '').replace('° W', '').trim());
+
+                // Ajustar el signo de la longitud según la dirección
+                if (parte.includes('° W')) {
+                    longitud = -longitud;
+                }
+            }
+        }
+    } else {
+        // Formato no reconocido
+        fn_Error('Formato de coordenadas no válido');
+        return;
     }
 
     fn_GenerarMap(latitud, longitud);
@@ -276,6 +299,9 @@ function fn_GenerarCalendario() {
 function fn_GenerarCita() {
     fn_block();
     var error = "";
+
+    var valorSpanFecha = document.getElementById("txtFecha" + idDia).innerHTML;
+
     var sMotivo = $("#txtMotivo").val();
 
     // Obtener referencias a los campos que deseas validar
@@ -288,20 +314,19 @@ function fn_GenerarCita() {
         // Verificar si no hay errores de validación antes de ejecutar el ajax
         $.ajax({
             url: "PerfilesProfesionistas.aspx/PostAcata", // URL de la solicitud
-            data: JSON.stringify({ idUsuario: iIdUsuario, sMotivo: sMotivo, idCalendario: iIdCaldendario }), // Datos a enviar en formato JSON
+            data: JSON.stringify({ idUsuario: iIdUsuario, sMotivo: sMotivo, idCalendario: iIdCaldendario, secha: valorSpanFecha }), // Datos a enviar en formato JSON
             type: "POST", // Método de la solicitud (POST en este caso)
             dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
             contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
             success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
                 //Acceder a las propiedades del objeto dentro del array
-                var obj = data.d;
-                console.log(obj);
+                var obj = data.d;;
 
                 if (obj.StatusCode == 200) {
                     fn_CerrarModal('modalCalendario');
                     fn_CerrarModal('modalRegistroCita');
                     fn_GenerarCalendario();
-                    console.log(obj.Message);
+                    fn_success(obj.Message);
 
                 } else {
                     fn_Error(obj.StatusCode + "\n" + obj.Message);

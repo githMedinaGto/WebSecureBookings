@@ -24,7 +24,7 @@ namespace WebSecureBookings
                     new Claim(ClaimTypes.NameIdentifier, userId),
                     new Claim(ClaimTypes.Role, role)
                 }),
-                    Expires = DateTime.UtcNow.AddSeconds(60),// Establece el tiempo de expiración a 2 minutos
+                    Expires = DateTime.UtcNow.AddSeconds(600),// Establece el tiempo de expiración a 2 minutos
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -108,7 +108,18 @@ namespace WebSecureBookings
         {
             if (!Generar_Token.IsTokenExpired(obtenerToken))
             {
-                string url = "/Views/PerfilesProfecionista/PerfilesProfesionistas.aspx";
+                Dictionary<string, string> claims = DecodeToken(obtenerToken);
+                string sIdRol = claims[ClaimTypes.Role];
+                string url = "";
+
+                if (sIdRol == "2")
+                {
+                    url = "/Views/PerfilesProfecionista/PerfilesProfesionistas.aspx";
+                }
+                else
+                {
+                    url = "/Views/VistaCitasProfecionista/VistaCitasProfecionista.aspx";
+                }
                 return url;
                 // Redirigir a la página principal
                 //HttpContext.Current.Response.Redirect(url); // Usar HttpContext.Current.Response // Redirigir a la página principal
@@ -116,8 +127,13 @@ namespace WebSecureBookings
             else
             {
                 //HttpContext.Current.Response.Redirect(
-                return "/Views/RegistroUsuarios/RegistroUsuarios.aspx";//);
+                return "/Index.aspx";//);
             }
+        }
+
+        public static void RemoveTokenFromCache()
+        {
+            HttpContext.Current.Session.Remove("token");
         }
     }
 }

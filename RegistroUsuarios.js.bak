@@ -1,0 +1,391 @@
+﻿window.onload = function () {
+    fn_Map();
+};
+var sUbicacion = {} ; // Declarar la variable ubicacion fuera de la función fn_Map
+var clipboard = new ClipboardJS('.copy-code');
+
+clipboard.on('success', function (event) {
+    event.clearSelection();
+    alertify.message('Código copiado al portapapeles.');
+});
+
+const container = document.querySelector('.container')
+const btnSignIn = document.querySelector('.btnSign-in')
+const btnSignUp = document.querySelector('.btnSign-up')
+
+btnSignIn.addEventListener('click', () => {
+    container.classList.add('active')
+})
+
+btnSignUp.addEventListener('click', () => {
+    container.classList.remove('active')
+})
+
+$("#btnInscribir").click(function () {
+    if ($("#txtRol").val() == 1004) {
+
+        GetCiudades();
+
+
+
+        var inputN = document.getElementById("txtName");
+        var inputP = document.getElementById("txtApP");
+        var inputM = document.getElementById("txtApM");
+
+        // Realizar la validación de los campos
+        var validacion1 = validarTexto(inputN, 4, 50);
+        var validacion2 = validarTexto(inputP, 4, 300);
+        var validacion3 = validarTexto(inputM, 4, 300);
+        if (validacion1 && validacion2 && validacion3) {
+            fn_AbrirModal('mRegistroProfesionista');
+            const input = document.getElementById("NumTelefono");
+            input.addEventListener("input", function () {
+                if (input.value.length > input.maxLength) {
+                    input.value = input.value.slice(0, input.maxLength);
+                }
+            });
+
+        } else {
+            fn_Alert("Verifique los datos");
+        }
+    } else if ($("#txtRol").val() == 1005) {
+        var inputN = document.getElementById("txtName");
+        var inputP = document.getElementById("txtApP");
+        var inputM = document.getElementById("txtApM");
+
+        // Realizar la validación de los campos
+        var validacion1 = validarTexto(inputN, 4, 50);
+        var validacion2 = validarTexto(inputP, 4, 300);
+        var validacion3 = validarTexto(inputM, 4, 300);
+        if (validacion1 && validacion2 && validacion3) {
+            fn_AbrirModal('mRegistrClientes');
+            
+        } else {
+            fn_Alert("Verifique los datos");
+        }
+    }
+});
+
+// Funcion para crear al usuario Cliente
+function fn_AgregarCliente() {
+    var error = "";
+    var sNombre = $("#txtName").val();
+    var sApellidoP = $("#txtApP").val();
+    var sApellidoM = $("#txtApM").val();
+    var sCorreo = $("#txtCorreo").val();
+    var sCorreop = $("#txtCorreop").val();
+    var sPassword = $("#txtPassword").val();
+    var sPassword2 = $("#txtPassword2").val();
+    var sPassword01 = $("#txtPassword01").val();
+    var sPassword02 = $("#txtPassword02").val();
+    var sTelefono = $("#NumTelefono").val();
+    var sArea = $("#txtArea").val();
+    var sProfesion = $("#txtProfesion").val();
+    var sRol = $("#txtRol").val();
+
+    //var sMunicipio = $("#txtMunicipio").val();
+    var sColonia = $("#txtColonia").val();
+    var sCalle = $("#txtCalle").val();
+    var sMunicipio = $("#cboMunicipio").val();
+    var iMunicipio = parseInt(sMunicipio);
+
+    if (sRol != "" && sRol == 1004) {
+
+        // Obtener referencias a los campos que deseas validar
+        var input1 = document.getElementById("txtName");
+        var input2 = document.getElementById("txtApP");
+        var input3 = document.getElementById("txtApM");
+
+        var input4 = document.getElementById("txtCorreop");
+        var input5 = document.getElementById("txtPassword01");
+        var input6 = document.getElementById("txtPassword02");
+        var input7 = document.getElementById("NumTelefono");
+        var input8 = document.getElementById("txtArea");
+        var input9 = document.getElementById("txtProfesion");
+
+        var input11 = document.getElementById("txtColonia");
+        var input12 = document.getElementById("txtCalle");
+
+        // Realizar la validación de los campos
+        var validacion1 = validarTexto(input1, 4, 50);
+        var validacion2 = validarTexto(input2, 4, 300);
+        var validacion3 = validarTexto(input3, 4, 300);
+        var validacion4 = validarTexto(input4, 4, 300);
+        var validacion5 = validarTexto(input5, 4, 300);
+        var validacion6 = validarTexto(input6, 4, 300);
+        var validacion7 = validarTexto(input7, 10, 10);
+        var validacion8 = validarTexto(input8, 4, 300);
+        var validacion9 = validarTexto(input9, 4, 300);
+        var validacion11 = validarTexto(input11, 4, 300);
+        var validacion12 = validarTexto(input12, 4, 300);
+
+        var email = validateEmail(input4);
+
+        const data = sUbicacion;
+        const sUbicacionString = JSON.stringify(data).replace(/[{}]/g, '');
+        // Verificar si no hay errores de validación antes de ejecutar la función fn_AgregarRol
+        if (validacion1 && validacion2 && validacion3 && validacion4 && validacion5 &&
+            validacion6 && validacion7 && validacion8 && validacion9 && validacion11 && validacion12) {
+            if (email) {
+                if (sPassword01 == sPassword02) {
+                        // Aquí puedes agregar la lógica para registrar las coordenadas en tu sistema
+                        $.ajax({
+                            url: "RegistroUsuarios.aspx/PostCrearProfesionista", // URL de la solicitud
+                            data: JSON.stringify({ sRol: sRol, sNombre: sNombre, sApellidoP: sApellidoP, sApellidoM: sApellidoM, sCorreop: sCorreop, sPassword01: sPassword01, sTelefono: sTelefono, sArea: sArea, sProfesion: sProfesion, iMunicipio: iMunicipio, sColonia: sColonia, sCalle: sCalle, sUbicacion: sUbicacionString }), // Datos a enviar en formato JSON
+                            type: "POST", // Método de la solicitud (POST en este caso)
+                            dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
+                            contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+                            success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+                                //Acceder a las propiedades del objeto dentro del array
+                                var obj = data.d;
+                                if (obj.StatusCode == 200) {
+                                    location.reload();
+                                    fn_Success(obj.Message);
+
+                                } else {
+                                    fn_Error(obj.Message);
+                                }
+                            },
+                            error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+                                console.log(status); // Imprime el estado del error
+                            }
+                        });
+                } else {
+                    fn_Alert("Verifique los datos");
+                }
+            } else {
+                fn_Alert("Verifique los datos");
+            }
+           
+        } else if (sRol == "" || sNombre == "" || sApellidoP == "" || sApellidoM == "") {
+            error = '<span style="color: red;">Favor de contestar el formulario</span>';
+            $('#txtDescripcion').after($(error).fadeOut(2000));
+        }
+
+    } else if (sRol != "" && sRol == 1005) {
+
+        // Obtener referencias a los campos que deseas validar
+        var input1 = document.getElementById("txtName");
+        var input2 = document.getElementById("txtApP");
+        var input3 = document.getElementById("txtApM");
+        var input4 = document.getElementById("txtCorreo");
+        var input5 = document.getElementById("txtPassword");
+        var input6 = document.getElementById("txtPassword2");
+
+        // Realizar la validación de los campos
+        var validacion1 = validarTexto(input1, 4, 30);
+        var validacion2 = validarTexto(input2, 4, 20);
+        var validacion3 = validarTexto(input3, 4, 20);
+        var validacion4 = validarTexto(input4, 4, 50);
+        var validacion5 = validarTexto(input5, 8, 12);
+        var validacion6 = validarTexto(input6, 8, 12);
+
+        var email = validateEmail(input4);
+        // Verificar si no hay errores de validación antes de ejecutar la función fn_AgregarRol
+        if (validacion1 && validacion2 && validacion3 && validacion4 && validacion5 && validacion6) {
+            if (email) {
+                if (sPassword === sPassword2) {
+                    $.ajax({
+                        url: "RegistroUsuarios.aspx/PostCrearCliente", // URL de la solicitud
+                        data: JSON.stringify({ sRol: sRol, sNombre: sNombre, sApellidoP: sApellidoP, sApellidoM: sApellidoM, sCorreo: sCorreo, sPassword: sPassword }), // Datos a enviar en formato JSON
+                        type: "POST", // Método de la solicitud (POST en este caso)
+                        dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
+                        contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+                        success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+                            //Acceder a las propiedades del objeto dentro del array
+                            var obj = data.d;
+                            if (obj.StatusCode == 200) {
+                                location.reload();
+                                fn_Success(obj.Message);
+
+                            } else {
+                                fn_Error(obj.Message);
+                            }
+                        },
+                        error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+                        }
+                    });
+                } else {
+                    fn_Alert("Verifique los datos");
+                }
+            } else {
+                fn_Alert("Verifique los datos");
+            }
+        } else if (!validacion4 || !validacion5 || !validacion6) {
+            fn_Alert("Verifique los datos");
+            error = '<span style="color: red;">Favor de contestar el formulario</span>';
+            $('#txtDescripcion').after($(error).fadeOut(2000));
+        }
+
+    }
+
+}
+
+
+
+function iniciarSesion() {
+    var usuario = document.getElementById("email").value;
+    var contrasena = document.getElementById("password").value;
+
+    var input1 = document.getElementById("email");
+    var input2 = document.getElementById("password");
+
+    // Realizar la validación de los campos
+    var validacionEmail = validarTexto(input1, 4, 50);
+    var validacionPassword = validarTexto(input2, 8, 12);
+
+    if (validacionEmail && validacionPassword) {
+        $.ajax({
+            url: "RegistroUsuarios.aspx/IniciarSesion", // URL de la solicitud
+            data: JSON.stringify({ usuario: usuario, contrasena: contrasena }), // Datos a enviar en formato JSON
+            type: "POST", // Método de la solicitud (POST en este caso)
+            dataType: "json", // Tipo de datos esperado en la respuesta (JSON en este caso)
+            contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+            success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+                //Acceder a las propiedades del objeto dentro del array
+                var obj = data.d;
+                if (obj.StatusCode == 200) {
+                    fn_Success(obj.Message);
+                    window.location.href = obj.Data;
+                } else {
+                    fn_Error(obj.Message);
+                }
+            },
+            error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+                console.log(status); // Imprime el estado del error
+            }
+        }); 
+    } else {
+        //Mandamos mensaje
+    }
+
+    
+}
+
+
+
+
+
+//function fn_Map() {
+//    // Configura tu token de acceso a Mapbox
+//    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5tZWRpbmEiLCJhIjoiY2t3am5ndGs3MHFxeDJ1cXZ5Z2Z0enZwdCJ9.-IeXyNNpFbRta6WDxASIrA';
+
+//    // Obtén la ubicación del usuario en tiempo real
+//    navigator.geolocation.getCurrentPosition(function (position) {
+//        var latitud = position.coords.latitude;
+//        var longitud = position.coords.longitude;
+
+//        // Crea una instancia del mapa
+//        var map = new mapboxgl.Map({
+//            container: 'fn_Map',
+//            style: 'mapbox://styles/mapbox/streets-v11',
+//            center: [longitud, latitud], // Coordenadas del centro del mapa (longitud, latitud)
+//            zoom: 16 // Nivel de zoom inicial
+//        });
+
+//        // Crea un marcador en la ubicación del usuario
+//        var marker = new mapboxgl.Marker({ draggable: true })
+//            .setLngLat([longitud, latitud]) // Coordenadas del marcador (longitud, latitud)
+//            .addTo(map);
+
+//        // Maneja el evento de arrastre del marcador para obtener las coordenadas actualizadas
+//        marker.on('dragend', function () {
+//            var coordinates = marker.getLngLat();
+//            console.log('Nuevas coordenadas:', coordinates);
+
+//        });
+
+//    });
+//}
+
+
+
+
+
+
+function fn_Map() {
+    // Configura tu token de acceso a Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXRoYW5tZWRpbmEiLCJhIjoiY2t3am5ndGs3MHFxeDJ1cXZ5Z2Z0enZwdCJ9.-IeXyNNpFbRta6WDxASIrA';
+
+    // Obtén la ubicación del usuario en tiempo real
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var latitud = position.coords.latitude;
+        var longitud = position.coords.longitude;
+
+        // Crea una instancia del mapa
+        var map = new mapboxgl.Map({
+            container: 'fn_Map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [longitud, latitud], // Coordenadas del centro del mapa (longitud, latitud)
+            zoom: 16 // Nivel de zoom inicial
+        });
+
+        // Crea un marcador en la ubicación del usuario
+        var marker = new mapboxgl.Marker({ draggable: true })
+            .setLngLat([longitud, latitud]) // Coordenadas del marcador (longitud, latitud)
+            .addTo(map);
+
+        // Maneja el evento de arrastre del marcador para obtener las coordenadas actualizadas
+        marker.on('dragend', function () {
+            var coordinates = marker.getLngLat();
+            sUbicacion.latitud = coordinates.lat;
+            sUbicacion.longitud = coordinates.lng;
+            console.log('Nuevas coordenadas:', coordinates);
+
+            //fn_ConvertirCoordenadas(sUbicacion); // Llama a la función fn_ConvertirCoordenadas con las coordenadas actualizadas
+        });
+
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function validateNumber(event) {
+    const input = event.target;
+    input.value = input.value.replace(/\D/g, "");
+}
+
+
+function GetCiudades() {
+    fn_block();
+    $("#cboMunicipio").html("");
+    //Realiza una solicitud AJAX utilizando jQuery
+    $.ajax({
+        url: "RegistroUsuarios.aspx/GetCiudades", // URL de la solicitud
+        data: "", // Datos a enviar (vacío en este caso)
+        type: "POST", // Método de la solicitud (POST en este caso)
+        dataType: "JSON", // Tipo de datos esperado en la respuesta (JSON en este caso)
+        contentType: "application/json; charset=utf-8", // Tipo de contenido de la solicitud
+        success: function (data) { // Función que se ejecuta cuando la solicitud es exitosa
+            //Acceder a las propiedades del objeto dentro del array
+            var obj = data.d[0];
+
+            if (obj.StatusCode == 200) {
+                $("#cboMunicipio").html(obj.Resultado);
+            } else {
+                fn_Error(obj.StatusCode + "\n" + obj.Message);
+            }
+        },
+        error: function (xhr, status, error) { // Función que se ejecuta cuando hay un error en la solicitud
+            fn_Error(status); // Imprime el estado del error
+        }
+    });
+    fn_unBlock();
+}

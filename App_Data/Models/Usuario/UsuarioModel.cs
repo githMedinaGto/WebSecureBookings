@@ -32,7 +32,7 @@ namespace WebSecureBookings
         public virtual MunicipioModel Municipio { get; set; }
         public virtual EstadoModel Estado { get; set; }
 
-        internal string sMunicipio;
-        internal string sEstado;
+        public string sMunicipio;
+        public string sEstado;
     }
 }

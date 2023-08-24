@@ -89,3 +89,18 @@ function ocultarError(input) {
         errorElement.parentNode.removeChild(errorElement);
     }
 }
+
+
+function validateEmail(input) {
+
+    var value = input.value.trim();
+    // Expresión regular para validar el formato de correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(value)) {
+        return true;
+    } else {
+        mostrarError(input, 'Verifique los datos');
+        return false;        
+    }
+}

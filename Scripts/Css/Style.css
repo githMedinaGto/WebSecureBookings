@@ -64,6 +64,7 @@ button.close[type="button"]:hover {
     float: right;
     clear: right;
     background-color: white;
+    z-index: 9999;
 }
 
 .alert-red {

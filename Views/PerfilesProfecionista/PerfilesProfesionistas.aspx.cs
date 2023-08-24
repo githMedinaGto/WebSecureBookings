@@ -212,12 +212,12 @@ namespace WebSecureBookings.Views.Perfilesprofecionista
         }
 
         [WebMethod]
-        public static ResponseModel<string> PostAcata(string idUsuario, string sMotivo, string idCalendario)
+        public static ResponseModel<string> PostAcata(string idUsuario, string sMotivo, string idCalendario, string sFecha)
         {
             int iIdUsuario = int.Parse(idUsuario);
             int iIdCalendario = int.Parse(idCalendario);
             PerfilesProfesionistasController profesionistasController = new PerfilesProfesionistasController();
-            return profesionistasController.PostCrearACta(iIdUsuario, iIdCalendario, sMotivo);
+            return profesionistasController.PostCrearACta(iIdUsuario, iIdCalendario, sMotivo, sFecha);
         }
 
         private static string GenerateTableHtml(List<UsuarioModel> data)

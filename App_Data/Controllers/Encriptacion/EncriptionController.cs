@@ -11,7 +11,7 @@ namespace WebSecureBookings
     public class EncriptionController
     {
         private static byte[] salt = Encoding.ASCII.GetBytes("ThisIsASecretSalt");
-        public static string Encrypt(string password)
+        public string Encrypt(string password)
         {
             byte[] encryptedBytes;
 

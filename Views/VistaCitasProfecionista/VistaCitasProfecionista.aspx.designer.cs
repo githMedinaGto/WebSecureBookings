@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebSecureBookings.Views.RegistroUsuarios
+namespace WebSecureBookings.Views.VistaCitasProfecionista
 {
 
 
-    public partial class RegistroUsuarios
+    public partial class VistaCitasProfecionista
     {
     }
 }

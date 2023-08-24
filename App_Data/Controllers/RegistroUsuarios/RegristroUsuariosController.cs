@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.Mvc;
 using WebSecureBookings.App_Data.Models;
 
@@ -7,21 +8,27 @@ namespace WebSecureBookings
 {
     public class RegristroUsuariosController
     {
+
+        // REGISTRO DE CLIENTES
         [HttpPost]
         public ResponseModel<string> PostCrearCliente(int sRol, string sNombre, string sApellidoP, string sApellidoM, string sCorreo, string sPassword)
         {
-            //string sNombre, string sApellidoP, string sApellidoM, string sCorreo, string sPassword, string sProfesion, string sTelefono, string sAreaProfesion, string sColonia, string sUbicacion
             try
             {
-                using (var dbContext = new DB_WSBEntities())
+                bool usuarioExiste = VerificarUsuarioEnBaseDeDatos(sCorreo, sNombre, sApellidoP, sApellidoM);
+                if (!usuarioExiste)
                 {
+                    using (var dbContext = new DB_WSBEntities())
+                    {
+                        EncriptionController encriptionController = new EncriptionController();
+                        string encriPass = encriptionController.Encrypt(sPassword);
 
                         var oCliente = new tUsuario();
                         oCliente.sNombre = sNombre;
                         oCliente.sApellidoP = sApellidoP;
                         oCliente.sApellidoM = sApellidoM;
                         oCliente.sCorreo = sCorreo;
-                        oCliente.sPassword = sPassword;
+                        oCliente.sPassword = encriPass;
                         oCliente.idRol = sRol;
                         oCliente.stelefono = "N/A";
                         oCliente.sProfecion = "N/A ";
@@ -31,15 +38,26 @@ namespace WebSecureBookings
 
                         dbContext.tUsuario.Add(oCliente);
                         dbContext.SaveChanges();
-                    
+
+
+                    }
+
+                    return new ResponseModel<string>
+                    {
+                        StatusCode = 200,
+                        Message = "Datos guardados exitosamente"
+                    };
 
                 }
-
-                return new ResponseModel<string>
+                else
                 {
-                    StatusCode = 200,
-                    Message = "Datos guardados exitosamente"
-                };
+                    return new ResponseModel<string>
+                    {
+                        StatusCode = 500,
+                        Message = "El usuario ya existe"
+                    };
+                }
+
             }
             catch (Exception ex)
             {
@@ -66,51 +84,66 @@ namespace WebSecureBookings
         }
 
 
-        // REGISTRO DE CLIENTES
+
+        // REGISTRO DE PROFESIONISTAS
         [HttpPost]
-        public ResponseModel<string> PostCrearProfesionista(int sRol,string sNombre, string sApellidoP, string sApellidoM, string sCorreop, string sPassword01, string sProfesion, string sTelefono, string sArea, int sMunicipio, string sColonia, string sCalle, string sUbicacion)
+        public ResponseModel<string> PostCrearProfesionista(int sRol, string sNombre, string sApellidoP, string sApellidoM, string sCorreop, string sPassword01, string sProfesion, string sTelefono, string sArea, int iMunicipio, string sColonia, string sCalle, string sUbicacion)
         {
-            //
+
             try
             {
-                using (var dbContext = new DB_WSBEntities())
+                bool usuarioExiste = VerificarUsuarioPEnBaseDeDatos(sCorreop, sNombre, sApellidoP, sApellidoM, sTelefono);
+                if (!usuarioExiste)
                 {
+                    using (var dbContext = new DB_WSBEntities())
+                    {
+                        EncriptionController encriptionController = new EncriptionController();
+                        string encriPass = encriptionController.Encrypt(sPassword01);
 
-                    var oCliente = new tUsuario();
-                    oCliente.sNombre = sNombre;
-                    oCliente.sApellidoP = sApellidoP;
-                    oCliente.sApellidoM = sApellidoM;
+                        var oCliente = new tUsuario();
+                        oCliente.sNombre = sNombre;
+                        oCliente.sApellidoP = sApellidoP;
+                        oCliente.sApellidoM = sApellidoM;
 
-                    oCliente.sCorreo = sCorreop;
-                    oCliente.sPassword = sPassword01;
-                    oCliente.idRol = sRol;
-                    oCliente.stelefono = sTelefono; 
+                        oCliente.sCorreo = sCorreop;
+                        oCliente.sPassword = encriPass;
+                        oCliente.idRol = sRol;
+                        oCliente.stelefono = sTelefono;
 
-                    oCliente.sProfecion = sProfesion;
-                    oCliente.sAreaProfesion = sArea;
-                    oCliente.sColonia = sColonia;
-                    oCliente.sUbicacion = sUbicacion;
-                    oCliente.sCalle = sCalle;
-                    oCliente.idMunicipio = sMunicipio;
+                        oCliente.sProfecion = sProfesion;
+                        oCliente.sAreaProfesion = sArea;
+                        oCliente.sColonia = sColonia;
+                        oCliente.sUbicacion = sUbicacion;
+                        oCliente.sCalle = sCalle;
+                        oCliente.idMunicipio = iMunicipio;
 
-                    oCliente.bEstatus = true;
-                    oCliente.dFechaRegistro = DateTime.Now;
+                        oCliente.bEstatus = true;
+                        oCliente.dFechaRegistro = DateTime.Now;
 
-
-
-
-                    dbContext.tUsuario.Add(oCliente);
-                    dbContext.SaveChanges();
+                        dbContext.tUsuario.Add(oCliente);
+                        dbContext.SaveChanges();
 
 
+                    }
+
+                    return new ResponseModel<string>
+                    {
+                        StatusCode = 200,
+                        Message = "Datos guardados exitosamente"
+                    };
                 }
-
-                return new ResponseModel<string>
+                else
                 {
-                    StatusCode = 200,
-                    Message = "Datos guardados exitosamente"
-                };
+                    return new ResponseModel<string>
+                    {
+                        StatusCode = 500,
+                        Message = "El usuario ya existe"
+                    };
+                }
             }
+
+
+
             catch (Exception ex)
             {
                 // Manejo de errores específicos y retorno de la respuesta personalizada
@@ -129,9 +162,31 @@ namespace WebSecureBookings
                     return new ResponseModel<string>
                     {
                         StatusCode = 404,
-                        Message = "No se pudo guardar los datos de la base de datos: " + ex.Message
+                        Message = "No se pudo guardar los datos de la base de datos: "
                     };
                 }
+            }
+        }
+
+
+
+        private bool VerificarUsuarioEnBaseDeDatos(string correo, string nombre, string apellidoP, string apellidoM)
+        {
+            // implementación utilizando Entity Framework:
+            using (var dbContext = new DB_WSBEntities())
+            {
+                var usuario = dbContext.tUsuario.FirstOrDefault(u => u.sCorreo == correo  || u.sNombre == nombre && u.sApellidoP == apellidoP && u.sApellidoM == apellidoM);
+                return usuario != null;
+            }
+        }
+
+        private bool VerificarUsuarioPEnBaseDeDatos(string correo, string nombre, string apellidoP, string apellidoM, string sTelefono)
+        {
+            // implementación utilizando Entity Framework:
+            using (var dbContext = new DB_WSBEntities())
+            {
+                var usuario = dbContext.tUsuario.FirstOrDefault(u => u.sCorreo == correo || u.stelefono == sTelefono || u.sNombre == nombre && u.sApellidoP == apellidoP && u.sApellidoM == apellidoM);
+                return usuario != null;
             }
         }
     }

@@ -1,116 +1,143 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PerfilUsuario.aspx.cs" Inherits="WebSecureBookings.Views.PerfilUsuario.PerfilUsuario" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script src="../../Scripts/Jquery/AccionesModales.js"></script>
+    <script src="../../Scripts/Jquery/ValidacionCaracteres.js"></script>
+    <script src="https://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
+    <script src="../../Scripts/Jquery/ohsnap.js"></script>
+
+    <script src="../../Scripts/Jquery/ConsumoAlertas.js"></script>
+    <script src="PerfilesUsuario.js"></script>
+
     <style>
-        .rounded-input {
-            border-radius: 5px;
-            padding: 5px;
-            width: 200px;
-            margin-bottom: 10px;
+        #body-map {
+            margin: 0;
+            padding: 0;
         }
-        .rounded-button {
-            border-radius: 5px;
-            padding: 5px 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .rounded-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        .rounded-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .rounded-slider {
-            position: absolute;
-            cursor: pointer;
+
+        #map {
             top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-        .rounded-slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-        input:checked + .rounded-slider {
-            background-color: #4CAF50;
-        }
-        input:focus + .rounded-slider {
-            box-shadow: 0 0 1px #4CAF50;
-        }
-        input:checked + .rounded-slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
+            width: 100%;
+            height: 200px;
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div>
-        <label for="txtNombre">Nombre:</label>
-        <br />
-        <asp:TextBox ID="txtNombre" runat="server" CssClass="rounded-input"></asp:TextBox>
+    <br />
+    <div class="row" style="width: 100%;">
+        <div class="col-md-12 text-center">
+            <h1 style="color: #3385d9">Usuario</h1>
+        </div>
+        <div class="col-md-12 center">
+            <hr style="width: auto; height: 3px; background: #caebf2">
+        </div>
     </div>
-    <div>
-        <label for="txtApellidoPaterno">Apellido Paterno:</label>
-        <br />
-        <asp:TextBox ID="txtApellidoPaterno" runat="server" CssClass="rounded-input"></asp:TextBox>
+
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 150)" disabled />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="apellidoP" class="form-label">Apellido Paterno</label>
+                <input type="text" class="form-control" id="apellidoP" placeholder="Apellido Paterno" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 150)" disabled />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="apellidoM" class="form-label">Apellido Materno</label>
+                <input type="text" class="form-control" id="apellidoM" placeholder="Apellido Materno" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 150)" disabled />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="profesion" class="form-label">Profesión</label>
+                <input type="text" class="form-control" id="profesion" placeholder="Profesión" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 150)" />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="areaProfesion" class="form-label">Área de Profesión</label>
+                <input type="text" class="form-control" id="areaProfesion" placeholder="Área de Profesión" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 150)" />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" onkeypress="return permite(event, 'num')" ninput="validarTexto(this, 10, 12)" />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="correo" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="correo" placeholder="Correo" readonly onkeypress="validateEmail(this)" />
+
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="municipio" class="form-label">Municipio</label>
+                <select class="form-select form-select-sm select2" aria-label=".form-select-sm example"  id="cboMunicipio" ></select>
+
+                <%--<input type="text" class="form-control" id="municipio" placeholder="Municipio" onkeypress="return permite(event, 'car')">--%>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="colonia" class="form-label">Colonia</label>
+                <input type="text" class="form-control" id="colonia" placeholder="Colonia" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 250)" />
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="calle" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle" placeholder="Calle" onkeypress="return permite(event, 'car')" oninput="validarTexto(this, 3, 250)" />
+            </div>
+            <div class="col-md-2 form-group">
+                <label for="estado" class="form-label">Estado del perfil</label>
+                <br />
+                <input type="checkbox" class="form-control form-check-input" id="desactivarPerfil">
+            </div>
+            <div class="col-md-1 text-center">
+                <br />
+                <button type="button" class="btn btn-secondary" onclick="mostrarAlerta()">Mapa</button>
+            </div>
+            <div class="col-md-1 text-center">
+                <br />
+                <button type="button" class="btn btn-used" onclick="UpdateUsario()">Actualizar</button>
+            </div>
+            <%--<div class="col-md-6">
+                <div class="mb-3">
+                    <label for="foto" class="form-label">Foto de Perfil</label>
+                    <input type="file" class="form-control" id="foto">
+                </div>
+                <div class="mb-3">
+                    <div class="text-center">
+                        <label for="imagenPerfil" class="form-label">Vista previa</label>
+                    </div>
+                    <div class="border rounded p-3">
+                        <img src='../../Assests/Fotos/633262.png' alt="Foto de perfil" id="imagenPerfil" class="img-fluid">
+                    </div>
+                </div>--%>
+        </div>
     </div>
-    <div>
-        <label for="txtApellidoMaterno">Apellido Materno:</label>
-        <br />
-        <asp:TextBox ID="txtApellidoMaterno" runat="server" CssClass="rounded-input"></asp:TextBox>
+    <div class="row">
     </div>
-    <div>
-        <label for="txtCorreo">Correo:</label>
-        <br />
-        <asp:TextBox ID="txtCorreo" runat="server" CssClass="rounded-input"></asp:TextBox>
+    <br />
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="modalDialog" runat="server">
+    <!-- Modal de las fechas disponibles-->
+    <div class="modal fade" id="modalMapa" tabindex="-1" role="dialog" aria-labelledby="modalMapa" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTituloMapa">Mapa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="JavaScript:$('#modalMapa').modal('hide');">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="body-map">
+                    <div id="map"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="JavaScript:$('#modalMapa').modal('hide');" id="btnCancelar">Cancelar</button>
+                    <button type="button" class="btn btn-used" id="btnActaulizarMapa">Actualizar</button>
+                    <button type="button" class="btn btn-used" id="btnGuardarMapa">Guardar</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="txtTelefono">Teléfono:</label>
-        <br />
-        <asp:TextBox ID="txtTelefono" runat="server" CssClass="rounded-input"></asp:TextBox>
-    </div>
-    <div>
-        <label for="txtProfesion">Profesión:</label>
-        <br />
-        <asp:TextBox ID="txtProfesion" runat="server" CssClass="rounded-input"></asp:TextBox>
-    </div>
-    <div>
-        <label for="txtUbicacion">Ubicación:</label>
-        <br />
-        <asp:TextBox ID="txtUbicacion" runat="server" CssClass="rounded-input"></asp:TextBox>
-    </div>
-    <div>
-        <label for="fileFoto">Foto de Perfil:</label>
-        <br />
-        <asp:FileUpload ID="fileFoto" runat="server" CssClass="rounded-input" />
-    </div>
-    <div>
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar/Actualizar" CssClass="rounded-button" OnClick="btnGuardar_Click" />
-    </div>
-    <div>
-        <label>Switch:</label>
-        <br />
-        <label class="rounded-switch">
-            <asp:CheckBox ID="chkSwitch" runat="server" AutoPostBack="true" OnCheckedChanged="chkSwitch_CheckedChanged" />
-            <span class="rounded-slider"></span>
-        </label>
-    </div>
+
 </asp:Content>

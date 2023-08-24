@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -97,6 +97,15 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.28.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>packages\SendGrid.9.28.1\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>packages\starkbank-ecdsa.1.3.3\lib\net452\StarkbankEcdsa.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -200,6 +209,7 @@
       <LastGenOutput>BD.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Index.aspx" />
     <Content Include="Scripts\Css\RegistroUsuarios.css" />
     <Content Include="Scripts\Css\Style.css" />
     <Content Include="Scripts\Jquery\AccionesModales.js" />
@@ -291,14 +301,16 @@
     <Content Include="Scripts\Jquery\FullCalendar\lib\main.min.js" />
     <Content Include="Scripts\Jquery\jquery-3.6.3.js" />
     <Content Include="Scripts\Jquery\ohsnap.js" />
+    <Content Include="Scripts\Jquery\RegistroUsuarios.js" />
     <Content Include="Scripts\Jquery\ValidacionCaracteres.js" />
-    <Content Include="Views\Autenticacion\RegistroUsuarios.aspx" />
-    <Content Include="Views\Autenticacion\RegistroUsuarios.js" />
     <Content Include="Views\PerfilUsuario\PerfilUsuario.aspx" />
+    <Content Include="Views\PerfilUsuario\PerfilesUsuario.js" />
+    <Content Include="Views\RecuperarCuenta\RecuperarCuenta.aspx" />
+    <Content Include="Views\RecuperarCuenta\RecuperarCuenta.js" />
+    <Content Include="Views\VistaCitasProfecionista\VistaCitasProfecionista.aspx" />
+    <Content Include="Views\VistaCitasProfecionista\VistaCitasProfecionista.js" />
     <Content Include="Views\VistaCitas\VistaCitas.aspx" />
     <Content Include="Views\VistaCitas\VistaCitas.js" />
-    <Content Include="Views\Index\Index.aspx" />
-    <Content Include="Views\Index\Index.js" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx" />
     <Content Include="Views\PerfilesProfecionista\PerfilesProfesionistas.js" />
     <Content Include="Web.config" />
@@ -319,6 +331,9 @@
     <Compile Include="App_Data\Models\Usuario\UsuarioModel.cs" />
     <Compile Include="App_Data\Controllers\Encriptacion\EncriptionController.cs" />
     <Compile Include="App_Data\Models\ManejoDeErrores\ManejoDeErroresModel.cs" />
+    <Compile Include="App_Data\Controllers\Token\GenerarToken.cs" />
+    <Compile Include="App_Data\Controllers\Autenticacion\AutenticacionController.cs" />
+    <Compile Include="App_Data\Controllers\Autenticacion\Autorizacion.cs" />
     <Compile Include="App_Data\Models\BD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -334,9 +349,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Controllers\Token\GenerarToken.cs" />
-    <Compile Include="App_Data\Controllers\Autenticacion\AutenticacionController.cs" />
-    <Compile Include="App_Data\Controllers\Autenticacion\Autorizacion.cs" />
+    <Compile Include="App_Data\Controllers\EnvioDeCorreo\EnvioDeCorreoController.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -344,8 +364,10 @@
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Controllers\PerfilUsuarios\PerfilesUsaurioController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Data\Controllers\RegistroUsuarios\RegristroUsuariosController.cs" />
+    <Compile Include="App_Data\Controllers\Token\TokenExpirationModule.cs" />
     <Compile Include="App_Data\Models\tActaConfirmacionCita.cs">
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
@@ -373,20 +395,27 @@
     <Compile Include="App_Data\Models\tUsuario.cs">
       <DependentUpon>BD.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Controllers\Token\TokenExpirationModule.cs" />
-    <Compile Include="Views\Autenticacion\RegistroUsuarios.aspx.cs">
-      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Autenticacion\RegistroUsuarios.aspx.designer.cs">
-      <DependentUpon>RegistroUsuarios.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="App_Data\Controllers\RecuperarCuenta\RecuperarCuentaController.cs" />
     <Compile Include="Views\PerfilUsuario\PerfilUsuario.aspx.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\PerfilUsuario\PerfilUsuario.aspx.designer.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecuperarCuenta\RecuperarCuenta.aspx.cs">
+      <DependentUpon>RecuperarCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RecuperarCuenta\RecuperarCuenta.aspx.designer.cs">
+      <DependentUpon>RecuperarCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VistaCitasProfecionista\VistaCitasProfecionista.aspx.cs">
+      <DependentUpon>VistaCitasProfecionista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\VistaCitasProfecionista\VistaCitasProfecionista.aspx.designer.cs">
+      <DependentUpon>VistaCitasProfecionista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\VistaCitas\VistaCitas.aspx.cs">
       <DependentUpon>VistaCitas.aspx</DependentUpon>
@@ -395,13 +424,6 @@
     <Compile Include="Views\VistaCitas\VistaCitas.aspx.designer.cs">
       <DependentUpon>VistaCitas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Index\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Index\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.cs">
       <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -409,6 +431,7 @@
     <Compile Include="Views\PerfilesProfecionista\PerfilesProfesionistas.aspx.designer.cs">
       <DependentUpon>PerfilesProfesionistas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Controllers\VistaCitasProfesionista\VistaCitasProfesionistaController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />

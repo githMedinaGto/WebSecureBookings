@@ -26,6 +26,7 @@ namespace WebSecureBookings.App_Data.Models
         public Nullable<int> idCalendario { get; set; }
         public Nullable<int> bEstatus { get; set; }
         public string sMotivo { get; set; }
+        public Nullable<System.DateTime> dFechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tCometario> tCometario { get; set; }
